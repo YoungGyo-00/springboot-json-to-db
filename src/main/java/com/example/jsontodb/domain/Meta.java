@@ -24,8 +24,7 @@ public class Meta {
 
     private String Label_id;
 
-    @OneToMany(mappedBy = "labelPath")
-    @ToString.Exclude
+    @OneToMany(mappedBy = "meta")
     private List<LabelPath> labelPaths = new ArrayList<>();
 
 }

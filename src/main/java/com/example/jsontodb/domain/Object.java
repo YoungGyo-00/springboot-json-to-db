@@ -22,7 +22,7 @@ public class Object {
 
     private String annotation_type;
 
-    @OneToMany(mappedBy = "point")
+    @OneToMany(mappedBy = "object")
     private List<Point> points = new ArrayList<>();
 
     private Long value;
@@ -30,5 +30,5 @@ public class Object {
     @ManyToOne
     @JoinColumn(name = "label_id")
     @ToString.Exclude
-    private Object object;
+    private Label label;
 }

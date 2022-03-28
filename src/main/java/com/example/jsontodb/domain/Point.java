@@ -23,5 +23,5 @@ public class Point {
     @ManyToOne
     @JoinColumn(name = "object_id")
     @ToString.Exclude
-    private Point point;
+    private Object object;
 }

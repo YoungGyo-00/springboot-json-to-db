@@ -16,8 +16,10 @@ public class LabelPath {
     @GeneratedValue
     private Long Id;
 
+    private String label_path;
+
     @ManyToOne
     @JoinColumn(name = "meta_id")
     @ToString.Exclude
-    private LabelPath labelPath;
+    private Meta meta;
 }
