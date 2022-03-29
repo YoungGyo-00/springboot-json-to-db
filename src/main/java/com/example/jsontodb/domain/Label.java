@@ -23,4 +23,8 @@ public class Label {
 
     @OneToOne
     private Category category;
+
+    public void addObject(Object object) {
+        this.objects.add(object);
+    }
 }

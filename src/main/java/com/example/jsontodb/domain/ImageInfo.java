@@ -19,9 +19,9 @@ public class ImageInfo {
     @GeneratedValue
     private Long Id;
 
-    private int height;
+    private Long height;
 
-    private int width;
+    private Long width;
 
     @OneToOne
     @ToString.Exclude

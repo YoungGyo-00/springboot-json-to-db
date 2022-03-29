@@ -32,4 +32,8 @@ public class Object {
     @JoinColumn(name = "label_id")
     @ToString.Exclude
     private Label label;
+
+    public void addPoint(Point point) {
+        this.points.add(point);
+    }
 }

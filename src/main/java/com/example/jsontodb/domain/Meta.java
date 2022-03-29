@@ -20,8 +20,6 @@ public class Meta {
 
     private String Data_key;
 
-    private String Image_info;
-
     private String Label_id;
 
     @OneToMany

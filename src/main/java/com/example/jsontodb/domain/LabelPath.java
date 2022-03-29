@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class LabelPath {
     @Id
     @GeneratedValue
+    @ToString.Exclude
     private Long Id;
 
     private String label_path;
