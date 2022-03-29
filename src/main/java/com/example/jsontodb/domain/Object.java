@@ -26,7 +26,9 @@ public class Object {
     @JoinColumn(name = "object_id")
     private List<Point> points = new ArrayList<>();
 
-    private Long value;
+    @OneToMany
+    @JoinColumn(name = "object_id")
+    private List<Property> properties = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "label_id")
@@ -35,5 +37,8 @@ public class Object {
 
     public void addPoint(Point point) {
         this.points.add(point);
+    }
+    public void addProperty(Property property) {
+        this.properties.add(property);
     }
 }

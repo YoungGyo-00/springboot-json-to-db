@@ -6,19 +6,22 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Point {
+public class Property {
     @Id
     @GeneratedValue
+    @ToString.Exclude
     private Long id;
 
-    private Double x;
+    private String property_name;
 
-    private Double y;
+    private String value;
 
     @ManyToOne
     @JoinColumn(name = "object_id")

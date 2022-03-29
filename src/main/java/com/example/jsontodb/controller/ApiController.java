@@ -1,5 +1,6 @@
 package com.example.jsontodb.controller;
 
+import com.example.jsontodb.service.LabelService;
 import com.example.jsontodb.service.MetaService;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
@@ -14,10 +15,17 @@ import java.util.HashMap;
 public class ApiController {
 
     private final MetaService metaService;
+    private final LabelService labelService;
 
-    @PostMapping("/test")
-    public String test(@RequestBody HashMap<Object, Object> params) throws IOException, ParseException {
-        metaService.save(params);
-        return "hello";
+    @PostMapping("/meta")
+    public String meta() throws IOException, ParseException {
+        metaService.metaSave();
+        return "성공";
+    }
+
+    @PostMapping("/label")
+    public String label() throws IOException, ParseException {
+        labelService.labelSave();
+        return "성공";
     }
 }

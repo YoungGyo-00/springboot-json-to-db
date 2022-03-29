@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -21,9 +18,10 @@ public class Category {
 
     private String property_name;
 
-    private Long value;
+    private String value;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "label_id")
     @ToString.Exclude
     private Label label;
 }

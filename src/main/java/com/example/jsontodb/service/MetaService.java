@@ -30,9 +30,10 @@ public class MetaService {
     private final ImageInfoRepository imageInfoRepository;
 
     @Transactional
-    public void save(HashMap<Object, Object> params) throws IOException, ParseException {
+    public void metaSave() throws IOException, ParseException {
 
-        String path = "C:\\Users\\user\\Desktop\\A30049099001TNG001O001SH.jpg.json";
+        String path = "C:\\Users\\user\\Desktop\\" +
+                "A30049099001TNG001O001SH.jpg.json";
         Reader reader = new FileReader(path);
 
         JSONParser parser = new JSONParser();
@@ -49,7 +50,6 @@ public class MetaService {
             LabelPath labelPath = new LabelPath();
 
             labelPath.setLabel_path((String) label_path.get(i));
-            System.out.println(label_path.get(i));
 
             meta.addLabelPath(labelPath);
             labelPathRepository.save(labelPath);
@@ -65,11 +65,7 @@ public class MetaService {
         meta.setImageInfo(imageInfo);
         imageInfo.setMeta(meta);
 
-        System.out.println(meta);
-
         metaRepository.save(meta);
         imageInfoRepository.save(imageInfo);
-
-        metaRepository.findAll().forEach(System.out::println);
     }
 }

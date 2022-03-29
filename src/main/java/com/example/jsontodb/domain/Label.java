@@ -21,10 +21,14 @@ public class Label {
     @JoinColumn(name = "label_id")
     private List<Object> objects = new ArrayList<>();
 
-    @OneToOne
-    private Category category;
+    @OneToMany
+    @JoinColumn(name = "label_id")
+    private List<Category> categories = new ArrayList<>();
 
     public void addObject(Object object) {
         this.objects.add(object);
+    }
+    public void addCategory(Category category) {
+        this.categories.add(category);
     }
 }
