@@ -22,7 +22,8 @@ public class Object {
 
     private String annotation_type;
 
-    @OneToMany(mappedBy = "object")
+    @OneToMany
+    @JoinColumn(name = "object_id")
     private List<Point> points = new ArrayList<>();
 
     private Long value;

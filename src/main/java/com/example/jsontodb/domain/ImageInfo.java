@@ -5,21 +5,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LabelPath {
+public class ImageInfo {
     @Id
     @GeneratedValue
     private Long Id;
 
-    private String label_path;
+    private int height;
 
-    @ManyToOne
-    @JoinColumn(name = "meta_id", insertable = false, updatable = false)
+    private int width;
+
+    @OneToOne
     @ToString.Exclude
     private Meta meta;
 }

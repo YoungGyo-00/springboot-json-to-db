@@ -24,7 +24,14 @@ public class Meta {
 
     private String Label_id;
 
-    @OneToMany(mappedBy = "meta")
+    @OneToMany
+    @JoinColumn(name = "meta_id")
     private List<LabelPath> labelPaths = new ArrayList<>();
 
+    @OneToOne
+    private ImageInfo imageInfo;
+
+    public void addLabelPath(LabelPath labelPath){
+        this.labelPaths.add(labelPath);
+    }
 }

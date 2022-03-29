@@ -9,9 +9,9 @@ import java.util.HashMap;
 public class ApiController {
     @PostMapping("/test")
     public String test(@RequestBody HashMap<Object, Object> param) {
-        param.forEach((key, value) -> {
+        /*param.forEach((key, value) -> {
             System.out.println(key + " = " + value);
-        });
-        return "good";
+        });*/
+        return "hello";
     }
 }

@@ -17,7 +17,8 @@ public class Label {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(mappedBy = "label")
+    @OneToMany
+    @JoinColumn(name = "label_id")
     private List<Object> objects = new ArrayList<>();
 
     @OneToOne
