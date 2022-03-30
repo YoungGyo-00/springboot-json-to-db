@@ -34,16 +34,12 @@ Superb AI 라벨링 작업 파일을 DB에 저장하는 기능
           implementation `com.google.code.gson:gson:2.8.7`
         }
         ```
-   
-   * `JSONObject`
-     * `JSON` 파일을 파싱하기 위해 JSONObject class의 `parse` Method
-     * `File Reader` 객체를 전달
-     * `get()` `Property` 명을 전달하여 값을 읽어옴.
-   
-
-   * `JSONArray`
-     * 다건 JSON객체가 내부에 있을 떄, `JSONObject`와 반복 사용.
-
-    
-   * `JsonParser`
-     * Json 내 Json 파싱
+   * `google-json-simple`
+     * `JSONObject`
+       * `JSON` 파일을 파싱하기 위해 JSONObject class의 `parse` Method
+       * `File Reader` 객체를 전달
+       * `get()` `Property` 명을 전달하여 값을 읽어옴.
+     * `JSONArray`
+       * 다건 JSON객체가 내부에 있을 떄, `JSONObject`와 반복 사용.
+     * `JsonParser`
+       * Json 내 Json 파싱

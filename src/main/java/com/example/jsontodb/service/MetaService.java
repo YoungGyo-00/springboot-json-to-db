@@ -30,7 +30,7 @@ public class MetaService {
     private final ImageInfoRepository imageInfoRepository;
 
     @Transactional
-    public void metaSave() throws IOException, ParseException {
+    public void save() throws IOException, ParseException {
 
         String path = "C:\\Users\\user\\Desktop\\" +
                 "A30049099001TNG001O001SH.jpg.json";

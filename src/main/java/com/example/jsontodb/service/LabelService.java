@@ -27,7 +27,7 @@ public class LabelService {
     private final PropertyRepository propertyRepository;
 
     @Transactional
-    public void labelSave() throws IOException, ParseException {
+    public void save() throws IOException, ParseException {
 
         String path = "C:\\Users\\user\\Desktop\\" +
                 "3d39237c-3e6c-497d-8cd4-0d05cfd550cc.json";
@@ -79,15 +79,8 @@ public class LabelService {
                 object.addPoint(point);
                 pointRepository.save(point);
             }
-
-
-            System.out.println("------------------");
-            System.out.println(object);
-            System.out.println("------------------");
-
             objectRepository.save(object);
         }
-
 
         JSONObject categories = (JSONObject) jsonObject.get("categories");
         JSONArray category_properties = (JSONArray) categories.get("properties");
@@ -100,13 +93,10 @@ public class LabelService {
             category.setProperty_name((String) properties.get("property_id"));
             category.setValue((String) properties.get("value"));
 
-            System.out.println(category);
-
             label.addCategory(category);
             categoryRepository.save(category);
         }
 
-        System.out.println(label);
         labelRepository.save(label);
     }
 }
