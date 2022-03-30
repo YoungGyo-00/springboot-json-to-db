@@ -79,6 +79,7 @@ public class LabelService {
                 object.addPoint(point);
                 pointRepository.save(point);
             }
+            label.addObject(object);
             objectRepository.save(object);
         }
 
@@ -98,5 +99,7 @@ public class LabelService {
         }
 
         labelRepository.save(label);
+
+        labelRepository.findAll().forEach(System.out::println);
     }
 }

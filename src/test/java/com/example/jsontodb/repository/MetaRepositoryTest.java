@@ -1,6 +1,5 @@
 package com.example.jsontodb.repository;
 
-import com.example.jsontodb.domain.LabelPath;
 import com.example.jsontodb.domain.Meta;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -22,14 +22,9 @@ public class Meta {
 
     private String Label_id;
 
-    @OneToMany
-    @JoinColumn(name = "meta_id")
-    private List<LabelPath> labelPaths = new ArrayList<>();
+    private String label_path;
 
     @OneToOne
     private ImageInfo imageInfo;
 
-    public void addLabelPath(LabelPath labelPath){
-        this.labelPaths.add(labelPath);
-    }
 }

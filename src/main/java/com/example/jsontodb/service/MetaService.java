@@ -1,12 +1,9 @@
 package com.example.jsontodb.service;
 
 import com.example.jsontodb.domain.ImageInfo;
-import com.example.jsontodb.domain.LabelPath;
 import com.example.jsontodb.domain.Meta;
 import com.example.jsontodb.repository.ImageInfoRepository;
-import com.example.jsontodb.repository.LabelPathRepository;
 import com.example.jsontodb.repository.MetaRepository;
-import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,18 +12,15 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.HashMap;
 
 @Service
 @RequiredArgsConstructor
 public class MetaService {
 
     private final MetaRepository metaRepository;
-    private final LabelPathRepository labelPathRepository;
     private final ImageInfoRepository imageInfoRepository;
 
     @Transactional
@@ -45,15 +39,7 @@ public class MetaService {
         meta.setLabel_id((String) jsonObject.get("label_id"));
 
         JSONArray label_path = (JSONArray) jsonObject.get("label_path");
-
-        for (int i = 0; i < label_path.size(); i++) {
-            LabelPath labelPath = new LabelPath();
-
-            labelPath.setLabel_path((String) label_path.get(i));
-
-            meta.addLabelPath(labelPath);
-            labelPathRepository.save(labelPath);
-        }
+        meta.setLabel_path((String) label_path.get(0));
 
         ImageInfo imageInfo = new ImageInfo();
 
@@ -67,5 +53,7 @@ public class MetaService {
 
         metaRepository.save(meta);
         imageInfoRepository.save(imageInfo);
+
+        metaRepository.findAll().forEach(System.out::println);
     }
 }
