@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Meta {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String Data_key;

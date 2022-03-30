@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Point {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Double x;

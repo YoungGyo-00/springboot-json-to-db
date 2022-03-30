@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.io.IOException;
 
 @RestController
@@ -18,6 +19,7 @@ public class ApiController {
 
     @PostMapping("/meta")
     public String meta() throws IOException, ParseException {
+
         metaService.save();
         return "성공";
     }
@@ -27,4 +29,6 @@ public class ApiController {
         labelService.save();
         return "성공";
     }
+
+
 }

@@ -29,28 +29,33 @@ public class LabelService {
     @Transactional
     public void save() throws IOException, ParseException {
 
-        String path = "C:\\Users\\user\\Desktop\\" +
+        String path = "C:\\Users\\user\\Desktop\\label\\" +
                 "3d39237c-3e6c-497d-8cd4-0d05cfd550cc.json";
 
         Reader reader = new FileReader(path);
 
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
+        JSONArray objects = (JSONArray) jsonObject.get("objects");
+        JSONObject categories = (JSONObject) jsonObject.get("categories");
+        JSONArray category_properties = (JSONArray) categories.get("properties");
 
         Label label = new Label();
 
-        JSONArray objects = (JSONArray) jsonObject.get("objects");
-
         for(int i = 0; i < objects.size(); i++) {
+
             Object object = new Object();
 
             JSONObject object_info = (JSONObject) objects.get(i);
             JSONArray object_properties = (JSONArray) object_info.get("properties");
-
-            object.setClass_name((String) object_info.get("class_name"));
-            object.setAnnotation_type((String) object_info.get("annotation_type"));
+            JSONObject annotation = (JSONObject) object_info.get("annotation");
+            JSONObject coord = (JSONObject) annotation.get("coord");
+            JSONArray temp1 = (JSONArray) coord.get("points");
+            JSONArray temp2 = (JSONArray) temp1.get(0);
+            JSONArray points = (JSONArray) temp2.get(0);
 
             for (int j = 0; j < object_properties.size(); j++) {
+
                 Property property = new Property();
 
                 JSONObject property_info = (JSONObject) object_properties.get(j);
@@ -63,30 +68,28 @@ public class LabelService {
                 propertyRepository.save(property);
             }
 
-            JSONObject annotation = (JSONObject) object_info.get("annotation");
-            JSONObject coord = (JSONObject) annotation.get("coord");
-            JSONArray temp1 = (JSONArray) coord.get("points");
-            JSONArray temp2 = (JSONArray) temp1.get(0);
-            JSONArray points = (JSONArray) temp2.get(0);
-
             for (int j = 0; j < points.size(); j++) {
+
                 Point point = new Point();
 
                 JSONObject point_info = (JSONObject) points.get(j);
+
                 point.setX((Double) point_info.get("x"));
                 point.setY((Double) point_info.get("y"));
 
                 object.addPoint(point);
                 pointRepository.save(point);
             }
+
+            object.setClass_name((String) object_info.get("class_name"));
+            object.setAnnotation_type((String) object_info.get("annotation_type"));
+
             label.addObject(object);
             objectRepository.save(object);
         }
 
-        JSONObject categories = (JSONObject) jsonObject.get("categories");
-        JSONArray category_properties = (JSONArray) categories.get("properties");
-
         for (int i = 0; i < category_properties.size(); i++) {
+
             Category category = new Category();
 
             JSONObject properties = (JSONObject) category_properties.get(i);

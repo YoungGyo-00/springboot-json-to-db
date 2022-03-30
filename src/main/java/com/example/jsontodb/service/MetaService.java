@@ -26,29 +26,26 @@ public class MetaService {
     @Transactional
     public void save() throws IOException, ParseException {
 
-        String path = "C:\\Users\\user\\Desktop\\" +
+        String path = "C:\\Users\\user\\Desktop\\meta\\" +
                 "A30049099001TNG001O001SH.jpg.json";
         Reader reader = new FileReader(path);
 
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
+        JSONArray label_path = (JSONArray) jsonObject.get("label_path");
+        JSONObject image_info = (JSONObject) jsonObject.get("image_info");
 
         Meta meta = new Meta();
-
-        meta.setData_key((String) jsonObject.get("data_key"));
-        meta.setLabel_id((String) jsonObject.get("label_id"));
-
-        JSONArray label_path = (JSONArray) jsonObject.get("label_path");
-        meta.setLabel_path((String) label_path.get(0));
-
         ImageInfo imageInfo = new ImageInfo();
-
-        JSONObject image_info = (JSONObject) jsonObject.get("image_info");
 
         imageInfo.setHeight((Long) image_info.get("height"));
         imageInfo.setWidth((Long) image_info.get("width"));
 
+        meta.setData_key((String) jsonObject.get("data_key"));
+        meta.setLabel_id((String) jsonObject.get("label_id"));
+        meta.setLabel_path((String) label_path.get(0));
         meta.setImageInfo(imageInfo);
+
         imageInfo.setMeta(meta);
 
         metaRepository.save(meta);

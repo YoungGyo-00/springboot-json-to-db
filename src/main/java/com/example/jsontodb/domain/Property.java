@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Property {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ToString.Exclude
     private Long id;
 
