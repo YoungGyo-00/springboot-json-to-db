@@ -19,7 +19,7 @@ public class Property {
     @ToString.Exclude
     private Long id;
 
-    private String property_name;
+    private String propertyName;
 
     private String value;
 

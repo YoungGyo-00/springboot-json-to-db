@@ -11,7 +11,6 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -25,84 +24,90 @@ public class LabelService {
     private final CategoryRepository categoryRepository;
     private final PointRepository pointRepository;
     private final PropertyRepository propertyRepository;
+    private final MetaRepository metaRepository;
 
     @Transactional
-    public void save() throws IOException, ParseException {
+    public void save(String folder_path, String file) throws IOException, ParseException {
+        try {
+            String path = folder_path + file;
+            String label_id = file.substring(0, file.length() - 5);
 
-        String path = "C:\\Users\\user\\Desktop\\label\\" +
-                "3d39237c-3e6c-497d-8cd4-0d05cfd550cc.json";
+            Reader reader = new FileReader(path);
 
-        Reader reader = new FileReader(path);
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
+            JSONArray objects = (JSONArray) jsonObject.get("objects");
+            JSONObject categories = (JSONObject) jsonObject.get("categories");
+            JSONArray category_properties = (JSONArray) categories.get("properties");
 
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) parser.parse(reader);
-        JSONArray objects = (JSONArray) jsonObject.get("objects");
-        JSONObject categories = (JSONObject) jsonObject.get("categories");
-        JSONArray category_properties = (JSONArray) categories.get("properties");
+            Label label = new Label();
 
-        Label label = new Label();
+            label.setFileName(label_id);
+            Meta meta = metaRepository.findByLabelId(label_id);
+            label.setImageInfo(meta.getImageInfo());
 
-        for(int i = 0; i < objects.size(); i++) {
+            for (int i = 0; i < objects.size(); i++) {
 
-            Object object = new Object();
+                Object object = new Object();
 
-            JSONObject object_info = (JSONObject) objects.get(i);
-            JSONArray object_properties = (JSONArray) object_info.get("properties");
-            JSONObject annotation = (JSONObject) object_info.get("annotation");
-            JSONObject coord = (JSONObject) annotation.get("coord");
-            JSONArray temp1 = (JSONArray) coord.get("points");
-            JSONArray temp2 = (JSONArray) temp1.get(0);
-            JSONArray points = (JSONArray) temp2.get(0);
+                JSONObject object_info = (JSONObject) objects.get(i);
+                JSONArray object_properties = (JSONArray) object_info.get("properties");
+                JSONObject annotation = (JSONObject) object_info.get("annotation");
+                JSONObject coord = (JSONObject) annotation.get("coord");
+                JSONArray temp1 = (JSONArray) coord.get("points");
+                JSONArray temp2 = (JSONArray) temp1.get(0);
+                JSONArray points = (JSONArray) temp2.get(0);
 
-            for (int j = 0; j < object_properties.size(); j++) {
+                for (int j = 0; j < object_properties.size(); j++) {
 
-                Property property = new Property();
+                    Property property = new Property();
 
-                JSONObject property_info = (JSONObject) object_properties.get(j);
+                    JSONObject property_info = (JSONObject) object_properties.get(j);
 
-                property.setValue((String) property_info.get("value"));
-                property.setProperty_name((String) property_info.get("property_name"));
+                    property.setValue((String) property_info.get("value"));
+                    property.setPropertyName((String) property_info.get("property_name"));
 
-                object.addProperty(property);
+                    object.addProperty(property);
 
-                propertyRepository.save(property);
+                    propertyRepository.save(property);
+                }
+
+                for (int j = 0; j < points.size(); j++) {
+
+                    Point point = new Point();
+
+                    JSONObject point_info = (JSONObject) points.get(j);
+
+                    point.setX((Double) point_info.get("x"));
+                    point.setY((Double) point_info.get("y"));
+
+                    object.addPoint(point);
+                    pointRepository.save(point);
+                }
+
+                object.setClassName((String) object_info.get("class_name"));
+                object.setAnnotationType((String) object_info.get("annotation_type"));
+
+                label.addObject(object);
+                objectRepository.save(object);
             }
 
-            for (int j = 0; j < points.size(); j++) {
+            for (int i = 0; i < category_properties.size(); i++) {
 
-                Point point = new Point();
+                Category category = new Category();
 
-                JSONObject point_info = (JSONObject) points.get(j);
+                JSONObject properties = (JSONObject) category_properties.get(i);
 
-                point.setX((Double) point_info.get("x"));
-                point.setY((Double) point_info.get("y"));
+                category.setPropertyName((String) properties.get("property_id"));
+                category.setValue((String) properties.get("value"));
 
-                object.addPoint(point);
-                pointRepository.save(point);
+                label.addCategory(category);
+                categoryRepository.save(category);
             }
 
-            object.setClass_name((String) object_info.get("class_name"));
-            object.setAnnotation_type((String) object_info.get("annotation_type"));
-
-            label.addObject(object);
-            objectRepository.save(object);
+            labelRepository.save(label);
+        } catch (NullPointerException e) {
+            System.out.println(file + " label 파일은 meta 파일이 없음");
         }
-
-        for (int i = 0; i < category_properties.size(); i++) {
-
-            Category category = new Category();
-
-            JSONObject properties = (JSONObject) category_properties.get(i);
-
-            category.setProperty_name((String) properties.get("property_id"));
-            category.setValue((String) properties.get("value"));
-
-            label.addCategory(category);
-            categoryRepository.save(category);
-        }
-
-        labelRepository.save(label);
-
-        labelRepository.findAll().forEach(System.out::println);
     }
 }

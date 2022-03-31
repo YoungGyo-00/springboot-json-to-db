@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class Point {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ToString.Exclude
     private Long id;
 
     private Double x;

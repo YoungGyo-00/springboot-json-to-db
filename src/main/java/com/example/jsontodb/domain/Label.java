@@ -17,6 +17,9 @@ public class Label {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
+    private String fileName;
+
     @OneToMany
     @JoinColumn(name = "label_id")
     private List<Object> objects = new ArrayList<>();
@@ -24,6 +27,9 @@ public class Label {
     @OneToMany
     @JoinColumn(name = "label_id")
     private List<Category> categories = new ArrayList<>();
+
+    @OneToOne
+    private ImageInfo imageInfo;
 
     public void addObject(Object object) {
         this.objects.add(object);

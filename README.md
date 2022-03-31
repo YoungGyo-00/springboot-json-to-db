@@ -1,15 +1,28 @@
 # springboot-json-to-db
-Superb AI 라벨링 작업 파일을 DB에 저장하는 기능
+Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON으로 돌리는 기능
 
 ---
+## 개발 기술
+* `프레임워크` : `Spring Boot`
+* `데이터 저장 계층` : `JPA`, `MySQL`
+* `build` : `Gradle`
+
+## 사전 지식
+* Class -> ex) Pen
+* Object -> ex) Blue Pen , Red Pen 
+* Instance -> ex) Blue Pen 1, Blue Pen 2 ...
+
 ## 개발 순서
 1. `DB 연동 (MySQL)`
+   * `ERD`
+   ![ERD](./src/main/resources/static/img/ERD.png)
 
 
 2. `Entity` (domain)
    * 배열을 데이터베이스에 2가지 저장법
      1. 해당 데이터를 별도의 테이블을 구성하고, 쿼리문의 조인을 통해 DTO를 구성
      2. 배열 형태의 데이터를 통째로 `String`으로 변환 후 DB에 저장. 꺼낼 때는, `String`을 파싱하여`List`
+   * `@Column(unique = true)`
 
 
 3. `Repository`
@@ -24,6 +37,7 @@ Superb AI 라벨링 작업 파일을 DB에 저장하는 기능
    * `JSON` -> `@RequestBody HashMap<Object, Object> params`
    * `Service`로 전송
    * `Talend API tester`로 예시 파일 전송
+   * `Folder Path` : `application.yml` 에 설정
    
 
 5. `Service`
@@ -43,3 +57,12 @@ Superb AI 라벨링 작업 파일을 DB에 저장하는 기능
        * 다건 JSON객체가 내부에 있을 떄, `JSONObject`와 반복 사용.
      * `JsonParser`
        * Json 내 Json 파싱
+
+   * [Folder Files 가져오기](https://codechacha.com/ko/java-list-files/)
+
+
+6. `예외 처리`
+* `SQLIntegrityConstraintViolationException` : DB에러에 대해 Exception 처리 불가능 -> `DataIntegrityViolationException`
+* `Transactional Rollback` : `@Transactional`이 걸려 있는 메서드 내부에서의 오류
+  * `UnexpectedRollbackException` : DB에 값이 저장되지 않는 현상
+

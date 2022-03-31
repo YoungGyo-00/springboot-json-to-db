@@ -18,11 +18,13 @@ public class Meta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String Data_key;
+    @Column(unique = true)
+    private String dataKey;
 
-    private String Label_id;
+    @Column(unique = true)
+    private String labelId;
 
-    private String label_path;
+    private String labelPath;
 
     @OneToOne
     private ImageInfo imageInfo;

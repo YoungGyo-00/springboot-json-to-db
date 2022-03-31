@@ -14,13 +14,10 @@ import javax.persistence.*;
 public class ImageInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     private Long height;
 
     private Long width;
 
-    @OneToOne
-    @ToString.Exclude
-    private Meta meta;
 }

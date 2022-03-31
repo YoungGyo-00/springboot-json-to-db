@@ -18,9 +18,9 @@ public class Object {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private String class_name;
+    private String className;
 
-    private String annotation_type;
+    private String annotationType;
 
     @OneToMany
     @JoinColumn(name = "object_id")
