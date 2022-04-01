@@ -1,7 +1,8 @@
 package com.example.jsontodb.controller;
 
-import com.example.jsontodb.service.LabelService;
+import com.example.jsontodb.service.ObjectService;
 import com.example.jsontodb.service.MetaService;
+import com.example.jsontodb.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,15 +18,19 @@ import java.io.IOException;
 public class ApiController {
 
     private final MetaService metaService;
-    private final LabelService labelService;
+    private final ObjectService objectService;
+    private final CategoryService categoryService;
 
     @Value("${env.meta}")
     private String meta_folder;
 
-    @Value("${env.label}")
-    private String label_folder;
+    @Value("${env.object}")
+    private String object_folder;
 
-    @PostMapping("/meta")
+    @Value("${env.category}")
+    private String category_folder;
+
+    @GetMapping("/meta")
     public String meta() throws IOException, ParseException {
         File dir = new File(meta_folder);
         for (String file : dir.list()){
@@ -38,12 +43,12 @@ public class ApiController {
         return "성공";
     }
 
-    @PostMapping("/label")
-    public String label() throws IOException, ParseException {
-        File dir = new File(label_folder);
+    @GetMapping("/object")
+    public String object() throws IOException, ParseException {
+        File dir = new File(object_folder);
         for (String file : dir.list()){
             try{
-                labelService.save(label_folder, file);
+                objectService.save(object_folder, file);
             } catch (UnexpectedRollbackException e){
 
             }
@@ -51,5 +56,14 @@ public class ApiController {
         return "성공";
     }
 
+    @GetMapping("/category")
+    public String category() throws IOException, ParseException {
+        try{
+            categoryService.save(category_folder);
+        } catch (UnexpectedRollbackException e) {
+
+        }
+        return "성공";
+    }
 
 }

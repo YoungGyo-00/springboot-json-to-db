@@ -21,4 +21,5 @@ server:
 
 env:
   meta: C:\Users\user\Desktop\meta\
-  label: C:\Users\user\Desktop\label\
+  object: C:\Users\user\Desktop\label\
+  category: C:\Users\user\Desktop\

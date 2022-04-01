@@ -3,7 +3,6 @@ package com.example.jsontodb.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,30 +14,22 @@ import java.util.List;
 @NoArgsConstructor
 public class Object {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private String id;
 
     private String className;
 
-    private String annotationType;
+    @Column(length = 3)
+    private int propertyValue;
 
-    @OneToMany
-    @JoinColumn(name = "object_id")
-    private List<Point> points = new ArrayList<>();
-
-    @OneToMany
-    @JoinColumn(name = "object_id")
-    private List<Property> properties = new ArrayList<>();
+    @Column(length = 20000)
+    private String points;
 
     @ManyToOne
-    @JoinColumn(name = "label_id")
-    @ToString.Exclude
-    private Label label;
+    @JoinColumn(name = "meta_id")
+    private Meta meta;
 
-    public void addPoint(Point point) {
-        this.points.add(point);
-    }
-    public void addProperty(Property property) {
-        this.properties.add(property);
-    }
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Category project;
+
 }

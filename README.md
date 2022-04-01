@@ -58,7 +58,8 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON으로 �
      * `JsonParser`
        * Json 내 Json 파싱
 
-   * [Folder Files 가져오기](https://codechacha.com/ko/java-list-files/)
+   * `File`
+     * 폴더 내 파일 가져오기 시 사용.
 
 
 6. `예외 처리`
@@ -66,3 +67,9 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON으로 �
 * `Transactional Rollback` : `@Transactional`이 걸려 있는 메서드 내부에서의 오류
   * `UnexpectedRollbackException` : DB에 값이 저장되지 않는 현상
 
+## 참고 자료
+* [PK int형 vs varchar형 1 - stackoverflow](https://stackoverflow.com/questions/2103322/varchar-as-foreign-key-primary-key-in-database-good-or-bad%20)
+* [PK int형 vs varchar형 2 - stackoverflow](https://stackoverflow.com/questions/3162202/sql-primary-key-integer-vs-varchar)
+* [Folder Files 가져오기](https://codechacha.com/ko/java-list-files/)
+* [Array in MySQL Databases - stackoverflow](https://stackoverflow.com/questions/10686333/save-array-in-mysql-database/32664559)
+* [MySQL TEXT vs BLOB vs CLOB 성능 관점, 사용성 관점](https://stackoverflow.com/questions/7071662/mysql-text-vs-blob-vs-clob)

@@ -15,18 +15,15 @@ import java.util.List;
 @AllArgsConstructor
 public class Meta {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true)
-    private String dataKey;
+    private String id;
 
     @Column(unique = true)
     private String labelId;
 
     private String labelPath;
 
-    @OneToOne
-    private ImageInfo imageInfo;
+    private int height;
+
+    private int width;
 
 }
