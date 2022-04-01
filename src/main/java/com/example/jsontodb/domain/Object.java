@@ -16,8 +16,6 @@ public class Object {
     @Id
     private String id;
 
-    private String className;
-
     @Column(length = 3)
     private int propertyValue;
 
@@ -29,7 +27,7 @@ public class Object {
     private Meta meta;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "class_id")
     private Category category;
 
 }

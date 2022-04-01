@@ -59,14 +59,9 @@ public class ObjectService {
                 point.add("\n");
 
                 object.setPoints(point.toString());
-                System.out.println("--------------");
                 object.setId((String) object_info.get("id"));
-                System.out.println("----------------");
-                object.setClassName((String) object_info.get("class_name"));
 
-                System.out.println("-------------------- 여기");
-                Category category = categoryRepository.findByClassName(object.getClassName());
-                System.out.println("--------------------여기?");
+                Category category = categoryRepository.findByClassName((String) object_info.get("class_name"));
                 Meta meta = metaRepository.findByLabelId(file.substring(0, file.length() - 5));
 
                 object.setPropertyValue(Integer.parseInt(String.valueOf(property.get("value"))));
