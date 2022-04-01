@@ -4,4 +4,5 @@ import com.example.jsontodb.domain.Meta;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MetaRepository extends JpaRepository<Meta, String> {
+    Meta findByLabelId(String label_id);
 }

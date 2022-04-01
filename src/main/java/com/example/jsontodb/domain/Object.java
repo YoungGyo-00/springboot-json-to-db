@@ -29,7 +29,7 @@ public class Object {
     private Meta meta;
 
     @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Category project;
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 }

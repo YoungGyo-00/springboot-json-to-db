@@ -1,5 +1,7 @@
 package com.example.jsontodb.service;
 
+import com.example.jsontodb.domain.Category;
+import com.example.jsontodb.domain.Meta;
 import com.example.jsontodb.domain.Object;
 import com.example.jsontodb.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +22,12 @@ import java.util.ArrayList;
 public class ObjectService {
 
     private final ObjectRepository objectRepository;
+    private final MetaRepository metaRepository;
+    private final CategoryRepository categoryRepository ;
 
     @Transactional
     public void save(String folder_path, String file) throws IOException, ParseException {
         try {
-
             String path = folder_path + file;
             Reader reader = new FileReader(path);
 
@@ -42,6 +45,8 @@ public class ObjectService {
                 JSONArray temp1 = (JSONArray) coord.get("points");
                 JSONArray temp2 = (JSONArray) temp1.get(0);
                 JSONArray points = (JSONArray) temp2.get(0);
+                JSONArray properties = (JSONArray) object_info.get("properties");
+                JSONObject property = (JSONObject) properties.get(0);
 
                 ArrayList<String> point = new ArrayList<>();
 
@@ -54,8 +59,19 @@ public class ObjectService {
                 point.add("\n");
 
                 object.setPoints(point.toString());
+                System.out.println("--------------");
                 object.setId((String) object_info.get("id"));
+                System.out.println("----------------");
                 object.setClassName((String) object_info.get("class_name"));
+
+                System.out.println("-------------------- 여기");
+                Category category = categoryRepository.findByClassName(object.getClassName());
+                System.out.println("--------------------여기?");
+                Meta meta = metaRepository.findByLabelId(file.substring(0, file.length() - 5));
+
+                object.setPropertyValue(Integer.parseInt(String.valueOf(property.get("value"))));
+                object.setCategory(category);
+                object.setMeta(meta);
 
                 objectRepository.save(object);
             }
@@ -64,4 +80,6 @@ public class ObjectService {
             System.out.println(file + " label 파일은 meta 파일이 없음");
         }
     }
+
+
 }

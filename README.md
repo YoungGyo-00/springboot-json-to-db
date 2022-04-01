@@ -14,9 +14,12 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON으로 �
 
 ## 개발 순서
 1. `DB 연동 (MySQL)`
-   * `ERD`
-   ![ERD](./src/main/resources/static/img/ERD.png)
+* `ERD` 1차
+![ERD 1차](./src/main/resources/static/img/ERD.png)
 
+
+* `ERD` 2차
+![ERD 2차](./src/main/resources/static/img/ERD2.png)
 
 2. `Entity` (domain)
    * 배열을 데이터베이스에 2가지 저장법
