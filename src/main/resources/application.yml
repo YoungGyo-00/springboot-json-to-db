@@ -15,6 +15,9 @@ spring:
     username: root
     password: 123456
     initialization-mode: always
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 server:
   port: 8080

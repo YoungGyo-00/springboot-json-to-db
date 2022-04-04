@@ -65,13 +65,16 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON으로 �
      * 폴더 내 파일 가져오기 시 사용.
 
 
-6. `예외 처리`
+6. 예외 처리
 * `SQLIntegrityConstraintViolationException` : DB에러에 대해 Exception 처리 불가능 -> `DataIntegrityViolationException`
 * `Transactional Rollback` : `@Transactional`이 걸려 있는 메서드 내부에서의 오류
   * `UnexpectedRollbackException` : DB에 값이 저장되지 않는 현상
 
+    
+7. `Swagger UI 연동`
 
-7. `DB 저장 용량 예상`
+
+8. DB 저장 용량 예상
 * `Row` 당 `Size` 구하기
   * `category` : 25 -> 655 (Byte)  =  1 -> 26  =  54만장 -> 14.04 (MB)
   * `meta` : 26 -> 630 (Byte)  =  1 -> 24  =  54만장 -> 12.96 (MB)
