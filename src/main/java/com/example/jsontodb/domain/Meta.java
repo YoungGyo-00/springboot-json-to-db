@@ -20,8 +20,6 @@ public class Meta {
     @Column(unique = true)
     private String labelId;
 
-    private String labelPath;
-
     private int height;
 
     private int width;

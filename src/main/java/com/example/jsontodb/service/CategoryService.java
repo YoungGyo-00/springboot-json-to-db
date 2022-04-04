@@ -30,14 +30,14 @@ public class CategoryService {
         JSONObject object_detection = (JSONObject) jsonObject.get("object_detection");
         JSONArray object_classes = (JSONArray) object_detection.get("object_classes");
 
-        for (int i = 0; i < object_classes.size(); i++){
+        for (Object o : object_classes){
             Category category = new Category();
 
-            JSONObject object_class = (JSONObject) object_classes.get(i);
+            JSONObject object_class = (JSONObject) o;
             JSONArray properties = (JSONArray) object_class.get("properties");
 
-            for(int j = 0; j < properties.size(); j++) {
-                JSONObject property = (JSONObject) properties.get(0);
+            for(Object p : properties) {
+                JSONObject property = (JSONObject) p;
 
                 category.setPropertyName((String) property.get("name"));
             }

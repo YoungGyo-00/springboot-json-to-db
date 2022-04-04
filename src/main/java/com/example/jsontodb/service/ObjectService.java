@@ -35,11 +35,11 @@ public class ObjectService {
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
             JSONArray objects = (JSONArray) jsonObject.get("objects");
 
-            for (int i = 0; i < objects.size(); i++) {
+            for (java.lang.Object o : objects) {
 
                 Object object = new Object();
 
-                JSONObject object_info = (JSONObject) objects.get(i);
+                JSONObject object_info = (JSONObject) o;
                 JSONObject annotation = (JSONObject) object_info.get("annotation");
                 JSONObject coord = (JSONObject) annotation.get("coord");
                 JSONArray temp1 = (JSONArray) coord.get("points");
@@ -50,10 +50,13 @@ public class ObjectService {
 
                 ArrayList<String> point = new ArrayList<>();
 
-                for (int j = 0; j < points.size(); j++) {
-                    JSONObject point_info = (JSONObject) points.get(j);
+                for (java.lang.Object p : points) {
+                    JSONObject point_info = (JSONObject) p;
 
-                    point.add("\n x : " + point_info.get("x") + " y : " + point_info.get("y"));
+                    String x = point_info.get("x").toString().substring(0,3);
+                    String y = point_info.get("y").toString().substring(0,3);
+
+                    point.add("\n x : " + x + " y : " + y);
                 }
 
                 point.add("\n");

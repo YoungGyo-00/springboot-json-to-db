@@ -29,7 +29,6 @@ public class MetaService {
 
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
-            JSONArray label_path = (JSONArray) jsonObject.get("label_path");
             JSONObject image_info = (JSONObject) jsonObject.get("image_info");
 
             Meta meta = new Meta();
@@ -39,7 +38,6 @@ public class MetaService {
 
             meta.setId(jsonObject.get("dataset") + "-" + jsonObject.get("data_key"));
             meta.setLabelId((String) jsonObject.get("label_id"));
-            meta.setLabelPath((String) label_path.get(0));
 
             metaRepository.save(meta);
             return ;
