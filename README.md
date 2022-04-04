@@ -70,9 +70,21 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON으로 �
 * `Transactional Rollback` : `@Transactional`이 걸려 있는 메서드 내부에서의 오류
   * `UnexpectedRollbackException` : DB에 값이 저장되지 않는 현상
 
+
+7. `DB 저장 용량 예상`
+* `Row` 당 `Size` 구하기
+  * `category` : 25 -> 655 (Byte)  =  1 -> 26  =  54만장 -> 14.04 (MB)
+  * `meta` : 26 -> 630 (Byte)  =  1 -> 24  =  54만장 -> 12.96 (MB)
+  * `object` : 30 -> 1638 (Byte)  =  1 -> 54  =  54만장 -> 29.16 (MB)
+
+
+* `analyze table ` : 인덱스를 재생성하여 성능을 최적화
+
 ## 참고 자료
 * [PK int형 vs varchar형 1 - stackoverflow](https://stackoverflow.com/questions/2103322/varchar-as-foreign-key-primary-key-in-database-good-or-bad%20)
 * [PK int형 vs varchar형 2 - stackoverflow](https://stackoverflow.com/questions/3162202/sql-primary-key-integer-vs-varchar)
 * [Folder Files 가져오기](https://codechacha.com/ko/java-list-files/)
 * [Array in MySQL Databases - stackoverflow](https://stackoverflow.com/questions/10686333/save-array-in-mysql-database/32664559)
 * [MySQL TEXT vs BLOB vs CLOB 성능 관점, 사용성 관점](https://stackoverflow.com/questions/7071662/mysql-text-vs-blob-vs-clob)
+* [DB Row Size 구하는 쿼리](https://wizardee.tistory.com/146)
+* [Analyze-Table doc](https://dev.mysql.com/doc/refman/5.6/en/analyze-table.html)
