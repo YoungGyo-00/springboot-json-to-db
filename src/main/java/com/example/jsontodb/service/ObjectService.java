@@ -72,7 +72,7 @@ public class ObjectService {
                 object.setCategory(category);
                 object.setMeta(meta);
 
-                objectRepository.save(object);
+                objectRepository.save(object).getId();
             }
 
         } catch (NullPointerException e) {

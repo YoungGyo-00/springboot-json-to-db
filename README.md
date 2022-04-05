@@ -1,5 +1,5 @@
 # springboot-json-to-db
-Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식으로 리턴하는 기능
+(Prototype)Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식으로 리턴하는 기능
 
 ---
 ## 개발 기술
@@ -19,12 +19,13 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식�
 * Instance -> ex) Blue Pen 1, Blue Pen 2 ...
 
 ## 개발 순서
-1. `DB 연동 (MySQL)`
-* `ERD` 1차(수정)
+### 1. `DB 연동 (MySQL)`
+### - `ERD` 1차(수정)
 ![ERD 1차](artifacts/docs_img/ERD.png)
 
 
-* `ERD` 2차
+### - `ERD` 2차
+
 ![ERD 2차](artifacts/docs_img/ERD2.png)
   * list를 DB에 저장할 경우 -> ex) `point`
     1. String으로 변환 후 저장 : 문자열이 길어지면 저장 못할 수 있음
@@ -35,14 +36,14 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식�
     * 구분을 위한 PK면, `VARCHAR`로 선언하는 것이 좋음
   
 
-2. `Entity` (domain)
+### 2. `Entity` (domain)
    * 배열을 데이터베이스에 2가지 저장법
      1. 해당 데이터를 별도의 테이블을 구성하고, 쿼리문의 조인을 통해 DTO를 구성
      2. 배열 형태의 데이터를 통째로 `String`으로 변환 후 DB에 저장. 꺼낼 때는, `String`을 파싱하여`List`
    * `@Column(unique = true)`
 
 
-3. `Repository`
+### 3. `Repository`
    * `DB Table`들 간의 연관 관계 확인
    * <Strong><u>객체 연관 관계랑의 차이 존재</u></Strong>
    * `@OneToMany` - `@ManyToOne`
@@ -50,15 +51,15 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식�
      * `@JoinColumn` : (우)
 
 
-4. `Controller`
+### 4. `Controller`
    * `JSON` -> `@RequestBody HashMap<Object, Object> params`
    * `Service`로 전송
    * `Talend API tester`로 예시 파일 전송
    * `Folder Path` : `application.yml` 에 설정
    * `DTO` & `Domain`간의 변환 작업 시행?(`Service` 단에서 처리??)
-   
 
-5. `Service`
+
+### 5. `Service`
    * `Gson` : `Java`에서 `JSON`을 파싱하고, 생성하기 위해 구글에서 개발한 오픈소스
      * `Gradle`
         ```
@@ -86,16 +87,16 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식�
      4. `Int` : 캐스팅 정수형 변환
 
 
-6. 예외 처리
+### 6. 예외 처리
 * `SQLIntegrityConstraintViolationException` : DB에러에 대해 Exception 처리 불가능 -> `DataIntegrityViolationException`
 * `Transactional Rollback` : `@Transactional`이 걸려 있는 메서드 내부에서의 오류
   * `UnexpectedRollbackException` : DB에 값이 저장되지 않는 현상
 
-    
-7. `Swagger UI 연동`
+
+### 7. `Swagger UI 연동`
 
 
-8. DB 저장 용량 예상
+### 8. DB 저장 용량 예상
 * `Row` 당 `Size` 구하기
   * `category` : 25 -> 655 (Byte)  =  1 -> 26  =  54만장 -> 14.04 (MB)
   * `meta` : 26 -> 630 (Byte)  =  1 -> 24  =  54만장 -> 12.96 (MB)
@@ -105,7 +106,7 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식�
 * `analyze table ` : 인덱스를 재생성하여 성능을 최적화
 
 
-9. `DTO`
+### 9. `DTO`
 * Data Transfer Object
 * Controller -> Service -> Repository 간의 통신
 * Service 계층에서 사용되는 잠재적인 설계 요소
@@ -129,7 +130,7 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식�
   * View Page가 아닌 반환값 그대로 클라이언트한테 return 하고 싶을 때
 
 
-10. `Unit Test`
+### 10. `Unit Test`
 * `JUint` : 테스트 도구
 * `@SpringBootTest` : 실제 DB와 connection 진행되는 Live Test 방법
 * `Service`에서 JSON Value가 DB에 정확하게 들어갔는지 확인

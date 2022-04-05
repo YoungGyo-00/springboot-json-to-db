@@ -3,13 +3,12 @@ package com.example.jsontodb.service;
 import com.example.jsontodb.domain.Category;
 import com.example.jsontodb.domain.Meta;
 import com.example.jsontodb.domain.Object;
-import com.example.jsontodb.dto.CategoryDto;
-import com.example.jsontodb.dto.ImageDto;
-import com.example.jsontodb.dto.MetaDto;
-import com.example.jsontodb.dto.ResponseDto;
+import com.example.jsontodb.dto.*;
 import com.example.jsontodb.repository.CategoryRepository;
 import com.example.jsontodb.repository.MetaRepository;
 import com.example.jsontodb.repository.ObjectRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,11 +24,14 @@ public class ResponseService {
     private final MetaRepository metaRepository;
 
     @Transactional
-    public ResponseDto response() {
+    public ResponseDto response() throws JsonProcessingException {
 
         Object object = objectRepository.findById("17318b2b-b743-4f05-8612-a8b78aaef99c").orElseThrow();
         Meta meta = metaRepository.findById(object.getMeta().getId()).orElseThrow();
         Category category = categoryRepository.findById(object.getCategory().getId()).orElseThrow();
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(object.getPoints());
 
         ResponseDto responseDTO = ResponseDto.builder()
                 .id(object.getId())

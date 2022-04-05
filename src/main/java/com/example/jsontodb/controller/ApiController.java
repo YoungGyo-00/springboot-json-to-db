@@ -5,6 +5,7 @@ import com.example.jsontodb.service.ObjectService;
 import com.example.jsontodb.service.MetaService;
 import com.example.jsontodb.service.CategoryService;
 import com.example.jsontodb.service.ResponseService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
@@ -75,7 +76,7 @@ public class ApiController {
     }
 
     @GetMapping("/response")
-    public ResponseDto response() {
+    public ResponseDto response() throws JsonProcessingException {
         return responseService.response();
     }
 
