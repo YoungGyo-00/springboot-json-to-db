@@ -48,18 +48,19 @@ public class ObjectService {
                 JSONArray properties = (JSONArray) object_info.get("properties");
                 JSONObject property = (JSONObject) properties.get(0);
 
-                ArrayList<String> point = new ArrayList<>();
-
+                JSONArray point = new JSONArray();
                 for (java.lang.Object p : points) {
                     JSONObject point_info = (JSONObject) p;
+                    JSONObject point_temp = new JSONObject();
 
-                    String x = point_info.get("x").toString().substring(0,3);
-                    String y = point_info.get("y").toString().substring(0,3);
+                    int x = (int) Math.round(Double.parseDouble(String.valueOf(point_info.get("x"))));
+                    int y = (int) Math.round(Double.parseDouble(String.valueOf(point_info.get("y"))));
 
-                    point.add("\n x : " + x + " y : " + y);
+                    point_temp.put("x", x);
+                    point_temp.put("y", y);
+
+                    point.add(point_temp);
                 }
-
-                point.add("\n");
 
                 object.setPoints(point.toString());
                 object.setId((String) object_info.get("id"));

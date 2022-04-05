@@ -7,6 +7,12 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식�
 * `데이터 저장 계층` : `JPA`, `MySQL`
 * `build` : `Gradle`
 
+## 기능
+* Superb AI Image 라벨링 작업 파일에서 필요한 Value DB에 저장
+* 실제 데이터가 맞게 들어갔는지 확인하는 Script
+* 시험적으로 2000장 DB에 저장 후 조회해보기
+* 진행 플로우 그리기
+
 ## 사전 지식
 * Class -> ex) Pen
 * Object -> ex) Blue Pen , Red Pen 
@@ -14,12 +20,20 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식�
 
 ## 개발 순서
 1. `DB 연동 (MySQL)`
-* `ERD` 1차
-![ERD 1차](./src/main/resources/static/img/ERD.png)
+* `ERD` 1차(수정)
+![ERD 1차](artifacts/docs_img/ERD.png)
 
 
 * `ERD` 2차
-![ERD 2차](./src/main/resources/static/img/ERD2.png)
+![ERD 2차](artifacts/docs_img/ERD2.png)
+  * list를 DB에 저장할 경우 -> ex) `point`
+    1. String으로 변환 후 저장 : 문자열이 길어지면 저장 못할 수 있음
+    2. Table 하나 생성 후 Join : Join 쿼리 날리는 비용 계산
+  * 최대한 테이블 하나에 몰아 넣고, 파티셔닝은 나중에 필요할 때
+  * `Id`
+    * 서로 계산하기 위해 선언하는 PK면, `INT`
+    * 구분을 위한 PK면, `VARCHAR`로 선언하는 것이 좋음
+  
 
 2. `Entity` (domain)
    * 배열을 데이터베이스에 2가지 저장법
@@ -65,6 +79,12 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식�
    * `File`
      * 폴더 내 파일 가져오기 시 사용.
 
+   * `Double`형 `JSON Value` `Int` 형으로 파싱해서 저장
+     1. `String` : 캐스팅 변환이 아닌 `String.valueof`로 형변환
+     2. `Double` : 실수형으로 변환
+     3. `Math.round()` : 소수점 반올림
+     4. `Int` : 캐스팅 정수형 변환
+
 
 6. 예외 처리
 * `SQLIntegrityConstraintViolationException` : DB에러에 대해 Exception 처리 불가능 -> `DataIntegrityViolationException`
@@ -106,9 +126,15 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식�
 
 
 * `@ResponseBody`
-  * View Page가 아닌 반환값 그대로 클라이언트한테 return 하고 싶을 떄
-## API 명세서 (크라우드 소싱 웹 포함)
-[Notion](https://shade-sled-bf2.notion.site/API-b11de231685246b49f97d96a4e6887da)
+  * View Page가 아닌 반환값 그대로 클라이언트한테 return 하고 싶을 때
+
+
+10. `Unit Test`
+* `JUint` : 테스트 도구
+* `@SpringBootTest` : 실제 DB와 connection 진행되는 Live Test 방법
+* `Service`에서 JSON Value가 DB에 정확하게 들어갔는지 확인
+## API 명세서
+[Notion - 크라우드 소싱 웹 개발 API도 포함](https://shade-sled-bf2.notion.site/API-b11de231685246b49f97d96a4e6887da)
 ## 참고 자료
 * [PK int형 vs varchar형 1 - stackoverflow](https://stackoverflow.com/questions/2103322/varchar-as-foreign-key-primary-key-in-database-good-or-bad%20)
 * [PK int형 vs varchar형 2 - stackoverflow](https://stackoverflow.com/questions/3162202/sql-primary-key-integer-vs-varchar)
