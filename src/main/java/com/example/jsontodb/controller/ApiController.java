@@ -1,6 +1,6 @@
 package com.example.jsontodb.controller;
 
-import com.example.jsontodb.dto.ResponseDTO;
+import com.example.jsontodb.dto.ResponseDto;
 import com.example.jsontodb.service.ObjectService;
 import com.example.jsontodb.service.MetaService;
 import com.example.jsontodb.service.CategoryService;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -73,8 +74,8 @@ public class ApiController {
         return "성공";
     }
 
-    @GetMapping("/get")
-    public ResponseDTO responser() {
+    @GetMapping("/response")
+    public ResponseDto response() {
         return responseService.response();
     }
 

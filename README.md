@@ -1,5 +1,5 @@
 # springboot-json-to-db
-Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON으로 돌리는 기능
+Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식으로 리턴하는 기능
 
 ---
 ## 개발 기술
@@ -41,6 +41,7 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON으로 �
    * `Service`로 전송
    * `Talend API tester`로 예시 파일 전송
    * `Folder Path` : `application.yml` 에 설정
+   * `DTO` & `Domain`간의 변환 작업 시행?(`Service` 단에서 처리??)
    
 
 5. `Service`
@@ -83,6 +84,31 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON으로 �
 
 * `analyze table ` : 인덱스를 재생성하여 성능을 최적화
 
+
+9. `DTO`
+* Data Transfer Object
+* Controller -> Service -> Repository 간의 통신
+* Service 계층에서 사용되는 잠재적인 설계 요소
+
+
+* `Jackson Property` 
+  * `@JsonIgnore` : `property`는 return 되지 않는다
+  * `@JsonInclude` 
+    * `ALWAYS` : 속성 값에 의존하지 말고 항상
+    * `NOT_EMPTY` : null 또는 값이 빈 경우가 아니면 포함
+    * `NOT_NULL` : null 아니면 포함
+    * `NOT_DEFAULT` : `bean`의 기본 생성자로 정의된 필드값과 다르게 변경된 필드만
+  * `@JsonProperty` : class의 property name을 바꿀 때
+
+
+* `GSON`
+  * Class를 직접 만들지 않고, 직접 JSON을 만들어 전송
+
+
+* `@ResponseBody`
+  * View Page가 아닌 반환값 그대로 클라이언트한테 return 하고 싶을 떄
+## API 명세서 (크라우드 소싱 웹 포함)
+[Notion](https://shade-sled-bf2.notion.site/API-b11de231685246b49f97d96a4e6887da)
 ## 참고 자료
 * [PK int형 vs varchar형 1 - stackoverflow](https://stackoverflow.com/questions/2103322/varchar-as-foreign-key-primary-key-in-database-good-or-bad%20)
 * [PK int형 vs varchar형 2 - stackoverflow](https://stackoverflow.com/questions/3162202/sql-primary-key-integer-vs-varchar)
@@ -91,3 +117,6 @@ Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON으로 �
 * [MySQL TEXT vs BLOB vs CLOB 성능 관점, 사용성 관점](https://stackoverflow.com/questions/7071662/mysql-text-vs-blob-vs-clob)
 * [DB Row Size 구하는 쿼리](https://wizardee.tistory.com/146)
 * [Analyze-Table doc](https://dev.mysql.com/doc/refman/5.6/en/analyze-table.html)
+* [DTO의 사용 범위에 대하여](https://tecoble.techcourse.co.kr/post/2021-04-25-dto-layer-scope/)
+* [DTO는 어느 레이어까지 사용하는 것이 맞을까?](https://www.slipp.net/questions/93)
+* [Entity To DTO Conversion for a Spring REST API](https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application)

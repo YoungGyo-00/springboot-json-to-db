@@ -1,7 +1,12 @@
 package com.example.jsontodb.service;
 
+import com.example.jsontodb.domain.Category;
 import com.example.jsontodb.domain.Meta;
-import com.example.jsontodb.dto.ResponseDTO;
+import com.example.jsontodb.domain.Object;
+import com.example.jsontodb.dto.CategoryDto;
+import com.example.jsontodb.dto.ImageDto;
+import com.example.jsontodb.dto.MetaDto;
+import com.example.jsontodb.dto.ResponseDto;
 import com.example.jsontodb.repository.CategoryRepository;
 import com.example.jsontodb.repository.MetaRepository;
 import com.example.jsontodb.repository.ObjectRepository;
@@ -20,15 +25,31 @@ public class ResponseService {
     private final MetaRepository metaRepository;
 
     @Transactional
-    public ResponseDTO response() {
+    public ResponseDto response() {
 
-        Meta meta = metaRepository.findByLabelId("fed25dc0-f196-405d-a189-d335af493e37");
+        Object object = objectRepository.findById("17318b2b-b743-4f05-8612-a8b78aaef99c").orElseThrow();
+        Meta meta = metaRepository.findById(object.getMeta().getId()).orElseThrow();
+        Category category = categoryRepository.findById(object.getCategory().getId()).orElseThrow();
 
-        ResponseDTO responseDTO = ResponseDTO.builder()
-                .id(meta.getId())
-                .labelId(meta.getId())
-                .height(meta.getHeight())
-                .width(meta.getWidth())
+        ResponseDto responseDTO = ResponseDto.builder()
+                .id(object.getId())
+                .propertyValue(object.getPropertyValue())
+                .points(object.getPoints())
+                .meta(MetaDto.builder()
+                        .id(meta.getId())
+                        .image_info(ImageDto.builder()
+                                .height(meta.getHeight())
+                                .width(meta.getWidth())
+                                .build())
+                        .labelId(meta.getLabelId())
+                        .build())
+                .category(CategoryDto.builder()
+                        .id(category.getId())
+                        .className(category.getClassName())
+                        .propertyName(category.getPropertyName())
+                        .annotationType(category.getAnnotationType())
+                        .superCategory(category.getSuperCategory())
+                        .build())
                 .build();
 
         return responseDTO;
