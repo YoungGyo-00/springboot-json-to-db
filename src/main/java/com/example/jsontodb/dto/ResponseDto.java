@@ -16,9 +16,9 @@ public class ResponseDto {
 
     private String points;
 
-    private MetaDto metaDto;
+    private MetaDto meta;
 
-    private CategoryDto categoryDto;
+    private CategoryDto category;
 
 
 }

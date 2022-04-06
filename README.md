@@ -142,6 +142,9 @@
   * [@WebMvcTest 단위 테스트 시 Bean 주입 에러](https://velog.io/@gillog/SpringBoot-WebMvcTest-%EB%8B%A8%EC%9C%84-%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%8B%9C-Bean-%EC%A3%BC%EC%9E%85-%EC%97%90%EB%9F%AC)
 ## API 명세서
 [Notion - 크라우드 소싱 웹 개발 API도 포함](https://shade-sled-bf2.notion.site/API-b11de231685246b49f97d96a4e6887da)
+
+## Agile Scrum
+[Notion - Agile Scrum (2) - 2022.04.06(수)](https://shade-sled-bf2.notion.site/Agile-Scrum-2-2022-04-06-8e472c03f070477fbe957e4d00634c51)
 ## 참고 자료
 * [PK int형 vs varchar형 1 - stackoverflow](https://stackoverflow.com/questions/2103322/varchar-as-foreign-key-primary-key-in-database-good-or-bad%20)
 * [PK int형 vs varchar형 2 - stackoverflow](https://stackoverflow.com/questions/3162202/sql-primary-key-integer-vs-varchar)
@@ -156,3 +159,4 @@
 * [스프링 부트 통합테스트 방법과 팁](https://galid1.tistory.com/735)
 * [MapStruct 사용 방법](https://kth990303.tistory.com/131)
 * [MapStruct DTO 안에 DTO](https://ryumodrn.tistory.com/26)
+* [MapStruct 1.4.2 guide PDF](https://mapstruct.org/documentation/stable/reference/pdf/mapstruct-reference-guide.pdf)

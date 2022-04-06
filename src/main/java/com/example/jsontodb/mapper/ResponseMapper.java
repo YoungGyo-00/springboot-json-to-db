@@ -10,7 +10,7 @@ import org.mapstruct.Mappings;
 public interface ResponseMapper extends GenericMapper<ResponseDto, Object> {
     @Override
     @Mappings({
-            @Mapping(source = "meta", target = "metaDto"),
-            @Mapping(source = "category", target = "categoryDto")})
+            @Mapping(source = "meta", target = "meta"),
+            @Mapping(source = "category", target = "category")})
     ResponseDto toDto(Object object);
 }
