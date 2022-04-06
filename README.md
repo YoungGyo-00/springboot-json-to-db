@@ -134,6 +134,10 @@
 * `JUint` : 테스트 도구
 * `@SpringBootTest` : 실제 DB와 connection 진행되는 Live Test 방법
 * `Service`에서 JSON Value가 DB에 정확하게 들어갔는지 확인
+* `Mockmvc`
+* <u>실행 오류</u>
+  * [java.lang.IllegalStateException: Failed to retrieve PlatformTransactionManager for @Transactional test](https://velog.io/@hanblueblue/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B83-4.-%EB%B2%84%EA%B7%B8-%EC%88%98%EC%A0%95)
+  * [@WebMvcTest 단위 테스트 시 Bean 주입 에러](https://velog.io/@gillog/SpringBoot-WebMvcTest-%EB%8B%A8%EC%9C%84-%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%8B%9C-Bean-%EC%A3%BC%EC%9E%85-%EC%97%90%EB%9F%AC)
 ## API 명세서
 [Notion - 크라우드 소싱 웹 개발 API도 포함](https://shade-sled-bf2.notion.site/API-b11de231685246b49f97d96a4e6887da)
 ## 참고 자료
@@ -147,3 +151,4 @@
 * [DTO의 사용 범위에 대하여](https://tecoble.techcourse.co.kr/post/2021-04-25-dto-layer-scope/)
 * [DTO는 어느 레이어까지 사용하는 것이 맞을까?](https://www.slipp.net/questions/93)
 * [Entity To DTO Conversion for a Spring REST API](https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application)
+* [스프링 부트 통합테스트 방법과 팁](https://galid1.tistory.com/735)
