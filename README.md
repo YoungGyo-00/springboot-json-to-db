@@ -1,7 +1,6 @@
 # springboot-json-to-db
 (Prototype)Superb AI 라벨링 작업 파일을 DB에 저장, 필요 컬럼만 JSON 형식으로 리턴하는 기능
 
----
 ## 개발 기술
 * `프레임워크` : `Spring Boot`
 * `데이터 저장 계층` : `JPA`, `MySQL`
@@ -11,7 +10,7 @@
 * Superb AI Image 라벨링 작업 파일에서 필요한 Value DB에 저장
 * 실제 데이터가 맞게 들어갔는지 확인하는 Script
 * 시험적으로 2000장 DB에 저장 후 조회해보기
-* 진행 플로우 그리기
+* [진행 플로우 그리기](https://github.com/YoungGyo-00/springboot-json-to-db/tree/master/artifacts/docs_managements)
 
 ## 사전 지식
 * Class -> ex) Pen
@@ -130,6 +129,9 @@
   * View Page가 아닌 반환값 그대로 클라이언트한테 return 하고 싶을 때
 
 
+* `MapStruct`
+  * 엔티티와 DTO 간에 변환할 때 자동 매핑 라이브러리
+  * `ModelMapper`보다 매핑 속도가 빠름
 ### 10. `Unit Test`
 * `JUint` : 테스트 도구
 * `@SpringBootTest` : 실제 DB와 connection 진행되는 Live Test 방법
@@ -148,7 +150,9 @@
 * [MySQL TEXT vs BLOB vs CLOB 성능 관점, 사용성 관점](https://stackoverflow.com/questions/7071662/mysql-text-vs-blob-vs-clob)
 * [DB Row Size 구하는 쿼리](https://wizardee.tistory.com/146)
 * [Analyze-Table doc](https://dev.mysql.com/doc/refman/5.6/en/analyze-table.html)
-* [DTO의 사용 범위에 대하여](https://tecoble.techcourse.co.kr/post/2021-04-25-dto-layer-scope/)
+* [DTO의 사용 범위에 대하여](https://xlffm3.github.io/spring%20&%20spring%20boot/DTOLayer/)
 * [DTO는 어느 레이어까지 사용하는 것이 맞을까?](https://www.slipp.net/questions/93)
 * [Entity To DTO Conversion for a Spring REST API](https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application)
 * [스프링 부트 통합테스트 방법과 팁](https://galid1.tistory.com/735)
+* [MapStruct 사용 방법](https://kth990303.tistory.com/131)
+* [MapStruct DTO 안에 DTO](https://ryumodrn.tistory.com/26)

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 @Builder
 public class ResponseDto {
@@ -18,8 +16,9 @@ public class ResponseDto {
 
     private String points;
 
-    private MetaDto meta;
+    private MetaDto metaDto;
 
-    private CategoryDto category;
+    private CategoryDto categoryDto;
+
 
 }
