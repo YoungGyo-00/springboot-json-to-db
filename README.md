@@ -171,6 +171,11 @@
       * 개발 단계에서 dev profile 활성화, 배포할 때는 real profile 활성화
       * 이는 `application.yml`에서 관리
 
+
+* Object property value 가 `empty` or `null` 인 경우가 존재함
+  * `empty` -> -1 로 일단 대체
+  * `null`  -> -2 로 일단 대체
+
 ## 참고 자료
 * [PK int형 vs varchar형 1 - stackoverflow](https://stackoverflow.com/questions/2103322/varchar-as-foreign-key-primary-key-in-database-good-or-bad%20)
 * [PK int형 vs varchar형 2 - stackoverflow](https://stackoverflow.com/questions/3162202/sql-primary-key-integer-vs-varchar)

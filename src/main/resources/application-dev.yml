@@ -4,7 +4,7 @@ spring:
       enabled: true
 
   jpa:
-    show-sql: true
+    # show-sql: true
     hibernate:
       ddl-auto: none # 자동 생성할건지
       properties:
