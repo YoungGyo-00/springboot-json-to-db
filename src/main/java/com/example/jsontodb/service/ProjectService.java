@@ -1,7 +1,7 @@
 package com.example.jsontodb.service;
 
-import com.example.jsontodb.domain.Category;
-import com.example.jsontodb.repository.CategoryRepository;
+import com.example.jsontodb.domain.Project;
+import com.example.jsontodb.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,9 +16,9 @@ import java.io.Reader;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryService {
+public class ProjectService {
 
-    private final CategoryRepository categoryRepository;
+    private final ProjectRepository categoryRepository;
 
     @Transactional
     public void save(String folder_path) throws IOException, ParseException {
@@ -31,7 +31,7 @@ public class CategoryService {
         JSONArray object_classes = (JSONArray) object_detection.get("object_classes");
 
         for (Object o : object_classes){
-            Category category = new Category();
+            Project project = new Project();
 
             JSONObject object_class = (JSONObject) o;
             JSONArray properties = (JSONArray) object_class.get("properties");
@@ -39,14 +39,14 @@ public class CategoryService {
             for(Object p : properties) {
                 JSONObject property = (JSONObject) p;
 
-                category.setPropertyName((String) property.get("name"));
+                project.setPropertyName((String) property.get("name"));
             }
 
-            category.setId((String) object_class.get("id"));
-            category.setClassName((String) object_class.get("name"));
-            category.setAnnotationType((String) object_class.get("annotation_type"));
+            project.setClassId((String) object_class.get("id"));
+            project.setClassName((String) object_class.get("name"));
+            project.setAnnotationType((String) object_class.get("annotation_type"));
 
-            categoryRepository.save(category);
+            categoryRepository.save(project);
         }
 
     }

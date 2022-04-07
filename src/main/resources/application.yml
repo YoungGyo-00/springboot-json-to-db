@@ -1,28 +1,9 @@
-spring:
-  h2:
-    console:
-      enabled: true
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-    generate-ddl: true
-    hibernate:
-      ddl-auto: update
-  datasource:
-    url: jdbc:mysql://localhost:3306/json_to_db
-    username: root
-    password: 123456
-    initialization-mode: always
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-
 server:
   port: 8080
 
 env:
-  meta: C:\Users\user\Desktop\meta\
-  object: C:\Users\user\Desktop\label\
-  category: C:\Users\user\Desktop\
+  folder: \\172.16.150.135\2_팀 공유 폴더\2) 학습 DATAset_Superb AI\Export 다운로드 버전\
+
+spring:
+  profiles:
+    active: dev

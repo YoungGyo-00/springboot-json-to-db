@@ -1,13 +1,12 @@
 package com.example.jsontodb.service;
 
 import com.example.jsontodb.base.BaseIntegrationTest;
-import com.example.jsontodb.domain.Category;
+import com.example.jsontodb.domain.Project;
 import com.example.jsontodb.domain.Meta;
 import com.example.jsontodb.domain.Object;
-import com.example.jsontodb.repository.CategoryRepository;
+import com.example.jsontodb.repository.ProjectRepository;
 import com.example.jsontodb.repository.MetaRepository;
 import com.example.jsontodb.repository.ObjectRepository;
-import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @Transactional
@@ -26,7 +24,7 @@ class AllServiceTest extends BaseIntegrationTest {
     @Autowired
     private ObjectRepository objectRepository;
     @Autowired
-    private CategoryRepository categoryRepository;
+    private ProjectRepository categoryRepository;
     @Autowired
     private MetaRepository metaRepository;
 
@@ -70,7 +68,7 @@ class AllServiceTest extends BaseIntegrationTest {
         String class_name = "Mineral waters";
         String property_name = "Volume";
 
-        Category category = categoryRepository.findById(id).orElseThrow();
+        Project category = categoryRepository.findById(id).orElseThrow();
 
         assertEquals(category.getAnnotationType(), annotation_type);
         assertEquals(category.getClassName(), class_name);

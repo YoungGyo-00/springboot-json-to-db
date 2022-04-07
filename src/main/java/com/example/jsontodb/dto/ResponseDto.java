@@ -18,7 +18,7 @@ public class ResponseDto {
 
     private MetaDto meta;
 
-    private CategoryDto category;
+    private ProjectDto project;
 
 
 }

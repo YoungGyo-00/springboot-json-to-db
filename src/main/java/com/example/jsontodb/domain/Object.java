@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -28,6 +26,6 @@ public class Object {
 
     @ManyToOne
     @JoinColumn(name = "class_id")
-    private Category category;
+    private Project project;
 
 }

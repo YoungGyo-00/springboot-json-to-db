@@ -1,12 +1,10 @@
 package com.example.jsontodb.base;
 
-import com.example.jsontodb.service.CategoryService;
+import com.example.jsontodb.service.ProjectService;
 import com.example.jsontodb.service.MetaService;
 import com.example.jsontodb.service.ObjectService;
 import com.example.jsontodb.service.ResponseService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +24,7 @@ public class BaseIntegrationTest {
     @MockBean
     private ObjectService objectService;
     @MockBean
-    private CategoryService categoryService;
+    private ProjectService categoryService;
     @MockBean
     private ResponseService responseService;
 }

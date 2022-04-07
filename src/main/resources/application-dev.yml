@@ -1,0 +1,26 @@
+spring:
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none # 자동 생성할건지
+      properties:
+        hibernate:
+          format_sql: true
+    generate-ddl: false # 위에서 설정한 ddl-auto 사용할건지
+
+
+  datasource:
+    schema: classpath*:db/schema.sql
+    url: jdbc:mysql://localhost:3306/json_to_db
+    username: root
+    password: 123456
+    initialization-mode: always
+    continue-on-error: true
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

@@ -20,12 +20,12 @@
 ## 개발 순서
 ### 1. `DB 연동 (MySQL)`
 ### - `ERD` 1차(수정)
-![ERD 1차](artifacts/docs_img/ERD.png)
+![ERD 최조 설계](artifacts/docs_img/ERD_1차.png)
 
 
 ### - `ERD` 2차
 
-![ERD 2차](artifacts/docs_img/ERD2.png)
+![ERD 수정](artifacts/docs_img/ERD_3차_2022.04.07.png)
   * list를 DB에 저장할 경우 -> ex) `point`
     1. String으로 변환 후 저장 : 문자열이 길어지면 저장 못할 수 있음
     2. Table 하나 생성 후 Join : Join 쿼리 날리는 비용 계산
@@ -76,8 +76,10 @@
      * `JsonParser`
        * Json 내 Json 파싱
 
-   * `File`
-     * 폴더 내 파일 가져오기 시 사용.
+   * `Files.walk(path)`
+     * path 에는 String이 아닌 `Path` 인터페이스 객체를 파라미터로 받음
+     * `Path` 객체는 `Paths.get(String)`으로 얻을 수 있음
+     * 
 
    * `Double`형 `JSON Value` `Int` 형으로 파싱해서 저장
      1. `String` : 캐스팅 변환이 아닌 `String.valueof`로 형변환
@@ -132,6 +134,7 @@
 * `MapStruct`
   * 엔티티와 DTO 간에 변환할 때 자동 매핑 라이브러리
   * `ModelMapper`보다 매핑 속도가 빠름
+  
 ### 10. `Unit Test`
 * `JUint` : 테스트 도구
 * `@SpringBootTest` : 실제 DB와 connection 진행되는 Live Test 방법
@@ -140,11 +143,34 @@
 * <u>실행 오류</u>
   * [java.lang.IllegalStateException: Failed to retrieve PlatformTransactionManager for @Transactional test](https://velog.io/@hanblueblue/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B83-4.-%EB%B2%84%EA%B7%B8-%EC%88%98%EC%A0%95)
   * [@WebMvcTest 단위 테스트 시 Bean 주입 에러](https://velog.io/@gillog/SpringBoot-WebMvcTest-%EB%8B%A8%EC%9C%84-%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%8B%9C-Bean-%EC%A3%BC%EC%9E%85-%EC%97%90%EB%9F%AC)
+
 ## API 명세서
 [Notion - 크라우드 소싱 웹 개발 API도 포함](https://shade-sled-bf2.notion.site/API-b11de231685246b49f97d96a4e6887da)
 
 ## Agile Scrum
-[Notion - Agile Scrum (2) - 2022.04.06(수)](https://shade-sled-bf2.notion.site/Agile-Scrum-2-2022-04-06-8e472c03f070477fbe957e4d00634c51)
+[Notion - Agile Scrum (1) - 2022.03.04](https://shade-sled-bf2.notion.site/Agile-Scrum-1-2022-03-04-ad266c5dedfd433da88c26556c9ea876)
+[Notion - Agile Scrum (2) - 2022.04.01](https://shade-sled-bf2.notion.site/Agile-Scrum-2-2022-04-01-a1fcfb323b9a4ce8acb89a00d7566899)
+[Notion - Agile Scrum (3) - 2022.04.06](https://shade-sled-bf2.notion.site/Agile-Scrum-2-2022-04-06-8e472c03f070477fbe957e4d00634c51)
+
+## 높고 높은 벽..
+* Spring JPA Auto DDL generation을 실행하면, 알파벳 순서로 정렬..
+  * DB Column 순서 또한 중요한 점을 고려하여, 문제점으로 분류
+  * JPA를 사용하면 하이버네이트가 자동으로 테이블 생성
+  * 이는 실제 배포 단계에서 위험
+  * <Strong>개념과 해결 방법 서치..</Strong>
+    * `DDL generation`
+      1. `@Entity` 클래스 찾기
+      2. `spring.jpa.generate-ddl=true` 옵션 적용시 자동 생성
+    * `SQL script`
+      * Spring 기본값으로 classpath 루트에 `schema.sql`파일이 있다면, 서버 시작시 스크립트를 실행
+      * `schema.sql` -> DDL spcript 명시
+      * `data.sql` -> Data를 위한 DML 명시
+      * JPA 기반의 애플리케이션을 만든다면, `schema.sql` or `hibernate.ddl-auto` 둘 중 하나만
+      * `schema.sql` -> db 폴더 생성 후 저장
+    * profile 파일 분리
+      * 개발 단계에서 dev profile 활성화, 배포할 때는 real profile 활성화
+      * 이는 `application.yml`에서 관리
+
 ## 참고 자료
 * [PK int형 vs varchar형 1 - stackoverflow](https://stackoverflow.com/questions/2103322/varchar-as-foreign-key-primary-key-in-database-good-or-bad%20)
 * [PK int형 vs varchar형 2 - stackoverflow](https://stackoverflow.com/questions/3162202/sql-primary-key-integer-vs-varchar)
@@ -160,3 +186,7 @@
 * [MapStruct 사용 방법](https://kth990303.tistory.com/131)
 * [MapStruct DTO 안에 DTO](https://ryumodrn.tistory.com/26)
 * [MapStruct 1.4.2 guide PDF](https://mapstruct.org/documentation/stable/reference/pdf/mapstruct-reference-guide.pdf)
+* [높고 높은 벽 JPA Auto DDL 설정 시 참고했던 자료 1](https://pravusid.kr/java/2018/10/10/spring-database-initialization.html)
+* [높고 높은 벽 JPA Auto DDL 설정 시 참고했던 자료 2](https://leveloper.tistory.com/38)
+* [높고 높은 벽 JPA 데이터베이스 초기화 doc](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.data-initialization)
+* [특정 경로의 하위 파일, 폴더 탐색(File.walk)](https://codechacha.com/ko/java-traverse-directory/)

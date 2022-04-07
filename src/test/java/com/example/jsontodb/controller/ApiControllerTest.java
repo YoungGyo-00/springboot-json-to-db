@@ -1,6 +1,6 @@
 package com.example.jsontodb.controller;
 
-import com.example.jsontodb.service.CategoryService;
+import com.example.jsontodb.service.ProjectService;
 import com.example.jsontodb.service.MetaService;
 import com.example.jsontodb.service.ObjectService;
 import com.example.jsontodb.service.ResponseService;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -26,7 +25,7 @@ class ApiControllerTest {
     @MockBean
     private ObjectService objectService;
     @MockBean
-    private CategoryService categoryService;
+    private ProjectService categoryService;
     @MockBean
     private ResponseService responseService;
 

@@ -20,8 +20,10 @@ public class Meta {
     @Column(unique = true)
     private String labelId;
 
+    @Column(length = 5)
     private int height;
 
+    @Column(length = 5)
     private int width;
 
 }

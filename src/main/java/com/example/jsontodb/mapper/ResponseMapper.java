@@ -11,6 +11,6 @@ public interface ResponseMapper extends GenericMapper<ResponseDto, Object> {
     @Override
     @Mappings({
             @Mapping(source = "meta", target = "meta"),
-            @Mapping(source = "category", target = "category")})
+            @Mapping(source = "project", target = "project")})
     ResponseDto toDto(Object object);
 }
