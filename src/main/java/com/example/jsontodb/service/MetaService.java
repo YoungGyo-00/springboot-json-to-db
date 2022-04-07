@@ -22,19 +22,29 @@ public class MetaService {
     private final MetaRepository metaRepository;
 
     @Transactional
-    public void save(String folder_path, String file) throws IOException, ParseException {
+    public void save(String path) throws IOException, ParseException {
         try{
-            String path = folder_path + file;
             Reader reader = new FileReader(path);
+            System.out.println(path);
 
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
-            JSONObject image_info = (JSONObject) jsonObject.get("image_info");
+
+            int height = 0;
+            int width = 0;
+            try {
+                JSONObject image_info = (JSONObject) jsonObject.get("image_info");
+
+                height = Integer.parseInt(String.valueOf(image_info.get("height")));
+                width = Integer.parseInt(String.valueOf(image_info.get("width")));
+            } catch (NumberFormatException e){
+
+            }
 
             Meta meta = new Meta();
 
-            meta.setHeight(Integer.parseInt(String.valueOf(image_info.get("height"))));
-            meta.setWidth(Integer.parseInt(String.valueOf(image_info.get("width"))));
+            meta.setHeight(height);
+            meta.setWidth(width);
 
             meta.setId(jsonObject.get("dataset") + "-" + jsonObject.get("data_key"));
             meta.setLabelId((String) jsonObject.get("label_id"));
@@ -42,7 +52,7 @@ public class MetaService {
             metaRepository.save(meta);
             return ;
         } catch (DataIntegrityViolationException e) {
-            System.out.println(file + "의 파일은 이미 DB에 저장됨");
+            System.out.println(path + "파일 DB에 저장됨");
         }
     }
 }

@@ -40,11 +40,12 @@ public class ObjectService {
                 JSONObject object_info = (JSONObject) o;
                 JSONObject annotation = (JSONObject) object_info.get("annotation");
                 JSONObject coord = (JSONObject) annotation.get("coord");
+                // 포인트가 없는 파일은 하나밖에 없어서 상의해봐야함 => 기능 문제
                 JSONArray temp1 = (JSONArray) coord.get("points");
                 JSONArray temp2 = (JSONArray) temp1.get(0);
                 JSONArray points = (JSONArray) temp2.get(0);
 
-                // 값이 없는 것도 있음
+                // 값이 없는 것도 있음, empty -> -1, null -> -2
                 JSONArray properties = (JSONArray) object_info.get("properties");
 
                 int property_value = -1;

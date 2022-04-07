@@ -9,7 +9,9 @@
 ## 기능
 * Superb AI Image 라벨링 작업 파일에서 필요한 Value DB에 저장
 * 실제 데이터가 맞게 들어갔는지 확인하는 Script
-* 시험적으로 2000장 DB에 저장 후 조회해보기
+* 시험적으로 3000장 DB에 저장
+  * 각 테이블의 DB Size 예상
+  * 저장 후 JSON 파일로 재조회해보기
 * [진행 플로우 그리기](https://github.com/YoungGyo-00/springboot-json-to-db/tree/master/artifacts/docs_managements)
 
 ## 사전 지식
@@ -99,9 +101,9 @@
 
 ### 8. DB 저장 용량 예상
 * `Row` 당 `Size` 구하기
-  * `category` : 25 -> 655 (Byte)  =  1 -> 26  =  54만장 -> 14.04 (MB)
-  * `meta` : 26 -> 630 (Byte)  =  1 -> 24  =  54만장 -> 12.96 (MB)
-  * `object` : 30 -> 1638 (Byte)  =  1 -> 54  =  54만장 -> 29.16 (MB)
+  * `project` : 25 -> 655 (Byte)  =  1 -> 26  =  54만장 -> 14.04 (MB)
+  * `meta` : 3076 files -> 630 (Byte)  =  1 -> 24  =  54만장 -> 12.96 (MB)
+  * `object` : 3076 files -> 7.5 (MB)  =  54만장 -> 1.316 (GB) ?_?
 
 
 * `analyze table ` : 인덱스를 재생성하여 성능을 최적화
@@ -172,9 +174,18 @@
       * 이는 `application.yml`에서 관리
 
 
+* List 합치기.. Stream으로 List 합치기.. list 안에 list 있을 때.. => Controlle에서 함수 재사용하기 위함..
+  1. addAll() -> list 합치기
+  2. concat() -> stream 합치기
+  3. flatMap() -> list 안에 list 합치기
+  
+## 3000개 파일 저장 시에 발생한 예외 상황
 * Object property value 가 `empty` or `null` 인 경우가 존재함
-  * `empty` -> -1 로 일단 대체
-  * `null`  -> -2 로 일단 대체
+    * `empty` -> -1 로 일단 대체
+    * `null`  -> -2 로 일단 대체
+
+
+* Meta 30XX A30049099001TNV030O001LV.jpg 값이 안 들어가 있어서 오류
 
 ## 참고 자료
 * [PK int형 vs varchar형 1 - stackoverflow](https://stackoverflow.com/questions/2103322/varchar-as-foreign-key-primary-key-in-database-good-or-bad%20)
@@ -195,3 +206,4 @@
 * [높고 높은 벽 JPA Auto DDL 설정 시 참고했던 자료 2](https://leveloper.tistory.com/38)
 * [높고 높은 벽 JPA 데이터베이스 초기화 doc](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.data-initialization)
 * [특정 경로의 하위 파일, 폴더 탐색(File.walk)](https://codechacha.com/ko/java-traverse-directory/)
+* [Stream으로 list 합치기](https://jekal82.tistory.com/60)
