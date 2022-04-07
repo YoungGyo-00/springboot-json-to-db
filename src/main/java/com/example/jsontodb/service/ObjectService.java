@@ -77,7 +77,7 @@ public class ObjectService {
                 String[] file_arr = path.split("\\\\");
                 String file = file_arr[file_arr.length - 1];
 
-                Project project = categoryRepository.findByClassName((String) object_info.get("class_name"));
+                Project project = categoryRepository.findTop1ByClassName((String) object_info.get("class_name"));
                 Meta meta = metaRepository.findByLabelId(file.substring(0, file.length() - 5));
 
                 object.setPoints(point.toString());
@@ -93,8 +93,6 @@ public class ObjectService {
             System.out.println(path + " 파일은 meta 파일이 예외");
         } catch (IndexOutOfBoundsException e){
             System.out.println(path + " 파일은 인덱스 바운드 예외");
-        } catch (Exception e) {
-            System.out.println(e);
         }
     }
 

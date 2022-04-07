@@ -39,7 +39,8 @@ public class ApiController {
     @ApiOperation(value = "Meta 폴더 DB 저장 용도", notes = "Object 파일보다 먼저 실행")
     @GetMapping("/meta")
     public String meta() throws IOException, ParseException {
-        path("\\meta\\").forEach(p -> {
+
+        path("\\meta\\", 3).forEach(p -> {
             try {
                 metaService.save(p);
             } catch (IOException e) {
@@ -48,13 +49,15 @@ public class ApiController {
                 e.printStackTrace();
             }
         });
+
         return "성공";
     }
 
     @ApiOperation(value = "Object 파일 DB 저장 용도", notes = "Meta, category 파일 먼저 저장한 후 실행")
     @GetMapping("/object")
     public String object() throws IOException, ParseException {
-        path("\\labels\\").forEach(p -> {
+
+        path("\\labels\\", 2).forEach(p -> {
             try {
                 objectService.save(p);
             } catch (IOException e) {
@@ -63,6 +66,24 @@ public class ApiController {
                 e.printStackTrace();
             }
         });
+
+        return "성공";
+    }
+
+    @ApiOperation(value = "Object 파일 DB 저장 용도", notes = "Meta, category 파일 먼저 저장한 후 실행")
+    @GetMapping("/project")
+    public String project() throws IOException, ParseException {
+
+        path("\\\\", 1).forEach(p -> {
+            try {
+                projectService.save(p);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        });
+
         return "성공";
     }
 
@@ -71,7 +92,8 @@ public class ApiController {
         return responseService.response();
     }
 
-    public List<String> path(String file_type) throws IOException {
+    // 파일 경로 리스트 반환
+    public List<String> path(String file_type, int max_depth) throws IOException {
 
         // 최상위 폴더 저장된 위치
         Path parent_path = Paths.get(folder_path);
@@ -87,8 +109,8 @@ public class ApiController {
 
         for(String path : parent_folder) {
             // 받은 type("meta", "object", "project") file 상위 폴더 위치
-            Path object_path = Paths.get(path + file_type);
-            Stream<Path> file_walk = Files.walk(object_path);
+            Path folder_path = Paths.get(path + file_type);
+            Stream<Path> file_walk = Files.walk(folder_path, max_depth);
 
             // file list 저장
             List<String> file_path;

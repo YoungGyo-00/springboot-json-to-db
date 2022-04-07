@@ -18,11 +18,10 @@ import java.io.Reader;
 @RequiredArgsConstructor
 public class ProjectService {
 
-    private final ProjectRepository categoryRepository;
+    private final ProjectRepository projectRepository;
 
     @Transactional
-    public void save(String folder_path) throws IOException, ParseException {
-        String path = folder_path + "project.json";
+    public void save(String path) throws IOException, ParseException {
         Reader reader = new FileReader(path);
 
         JSONParser parser = new JSONParser();
@@ -46,7 +45,7 @@ public class ProjectService {
             project.setClassName((String) object_class.get("name"));
             project.setAnnotationType((String) object_class.get("annotation_type"));
 
-            categoryRepository.save(project);
+            projectRepository.save(project);
         }
 
     }

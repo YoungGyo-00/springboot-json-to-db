@@ -100,10 +100,16 @@
 
 
 ### 8. DB 저장 용량 예상
-* `Row` 당 `Size` 구하기
-  * `project` : 25 -> 655 (Byte)  =  1 -> 26  =  54만장 -> 14.04 (MB)
-  * `meta` : 3076 files -> 630 (Byte)  =  1 -> 24  =  54만장 -> 12.96 (MB)
-  * `object` : 3076 files -> 7.5 (MB)  =  54만장 -> 1.316 (GB) ?_?
+* `Row` 당 `Size` 구하기 (20 폴더 기준 - 3076 files)
+  * `project`
+    * time : 1.3s   =  4분 예상
+    * size : 0.094 MB  =  16.5 MB
+  * `meta` 
+    * time : 1m 3s   =  3시간 예상
+    * size : 0.766 MB   = 134 MB
+  * `object`
+    * time : 4m 45s   =  14시간 예상
+    * size : 10.578 MB  = 1.8 GB ?_?
 
 
 * `analyze table ` : 인덱스를 재생성하여 성능을 최적화
@@ -183,9 +189,11 @@
 * Object property value 가 `empty` or `null` 인 경우가 존재함
     * `empty` -> -1 로 일단 대체
     * `null`  -> -2 로 일단 대체
-
-
+  
 * Meta 30XX A30049099001TNV030O001LV.jpg 값이 안 들어가 있어서 오류
+* `javax.persistence.NonUniqueResultException: query did not return a unique result: 2`
+  * JPA Repository 쿼리 값이 1개가 아닌 복수 개가 넘어오는 경우
+  * limit 설정으로 첫 번째 값만 불러오기로 일단은 해결
 
 ## 참고 자료
 * [PK int형 vs varchar형 1 - stackoverflow](https://stackoverflow.com/questions/2103322/varchar-as-foreign-key-primary-key-in-database-good-or-bad%20)

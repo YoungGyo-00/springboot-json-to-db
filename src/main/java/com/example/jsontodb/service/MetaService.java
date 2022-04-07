@@ -25,7 +25,6 @@ public class MetaService {
     public void save(String path) throws IOException, ParseException {
         try{
             Reader reader = new FileReader(path);
-            System.out.println(path);
 
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
