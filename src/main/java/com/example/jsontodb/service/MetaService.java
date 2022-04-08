@@ -38,7 +38,7 @@ public class MetaService {
                 height = Integer.parseInt(String.valueOf(image_info.get("height")));
                 width = Integer.parseInt(String.valueOf(image_info.get("width")));
             } catch (NumberFormatException e){
-                System.out.println(e);
+                
             }
 
             Meta meta = new Meta();

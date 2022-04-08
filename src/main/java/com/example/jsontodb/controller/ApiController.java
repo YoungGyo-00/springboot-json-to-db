@@ -39,6 +39,7 @@ public class ApiController {
     @ApiOperation(value = "Meta 폴더 DB 저장 용도", notes = "Object 파일보다 먼저 실행")
     @GetMapping("/meta")
     public String meta() throws IOException{
+        System.out.println("meta 파일 실행");
         path("\\meta\\", 3).forEach(p -> metaService.save(p));
         return "성공";
     }
@@ -46,6 +47,7 @@ public class ApiController {
     @ApiOperation(value = "Object 파일 DB 저장 용도", notes = "Meta, category 파일 먼저 저장한 후 실행")
     @GetMapping("/object")
     public String object() throws IOException {
+        System.out.println("object 파일 실행");
         path("\\labels\\", 2).forEach(p -> objectService.save(p));
         return "성공";
     }
@@ -53,10 +55,12 @@ public class ApiController {
     @ApiOperation(value = "Object 파일 DB 저장 용도", notes = "Meta, category 파일 먼저 저장한 후 실행")
     @GetMapping("/project")
     public String project() throws IOException {
+        System.out.println("project 파일 실행");
         path("\\\\", 1).forEach(p -> projectService.save(p));
         return "성공";
     }
 
+    @ApiOperation(value = "JSON 파일로 뽑아보기")
     @GetMapping("/response")
     public ResponseDto response() {
         return responseService.response();

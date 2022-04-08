@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
 public class ResponseDto {
@@ -14,11 +16,10 @@ public class ResponseDto {
     @JsonProperty(value = "property_value")
     private int propertyValue;
 
-    private String points;
+    private List<PointDto> points;
 
     private MetaDto meta;
 
     private ProjectDto project;
-
 
 }

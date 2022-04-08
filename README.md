@@ -121,15 +121,15 @@ analyze table object;
 analyze table project_info;
 analyze table meta;
 ```
-* `Row` 당 `Size` 구하기 (20 폴더 기준 - 3076 files)
-  * `project`
+* `Row` 당 `Size` 구하기 (기준. 20 폴더 : 3076 files, project : 612 개, object : 7069 개 )
+  * `project` 
     * time : 1.3s   =  4분 예상
-    * size : 0.094 MB  =  16.5 MB
+    * size : 0.109 MB  =  18 MB
   * `meta` 
     * time : 1m 3s   =  3시간 예상
     * size : 0.766 MB   = 134 MB
   * `object`
-    * time : 4m 45s   =  14시간 예상
+    * time : 4m 5s   =  12.5시간 예상
     * size : 10.578 MB  = 1.8 GB ?_?
 
 
@@ -212,9 +212,18 @@ analyze table meta;
     * `null`  -> -2 로 일단 대체
   
 * Meta 30XX A30049099001TNV030O001LV.jpg 값이 안 들어가 있어서 오류
+
 * `javax.persistence.NonUniqueResultException: query did not return a unique result: 2`
   * JPA Repository 쿼리 값이 1개가 아닌 복수 개가 넘어오는 경우
   * limit 설정으로 첫 번째 값만 불러오기로 일단은 해결
+
+## 더 공부가 필요한 부분
+* Custom Exception Handling + ResponseEntity
+* Stream
+* Mockmvc + Unit Test 방법
+* DB size 측정 기준 및 파티셔닝 기준 + 성능 측면
+* slf4j
+
 
 ## 참고 자료
 * [PK int vs varchar 1 - stackoverflow](https://stackoverflow.com/questions/2103322/varchar-as-foreign-key-primary-key-in-database-good-or-bad%20)

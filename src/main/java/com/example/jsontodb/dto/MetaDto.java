@@ -14,20 +14,17 @@ public class MetaDto {
     @JsonProperty(value = "meta_id")
     private String id;
 
-    private int height;
-
-    private int width;
-//    private ImageDto image_info;
+    private ImageDto image_info;
 
     @JsonProperty(value = "label_id")
     private String labelId;
 
-    /*@Data
+    @Data
     @Builder
     public static class ImageDto{
 
         private int height;
 
         private int width;
-    }*/
+    }
 }

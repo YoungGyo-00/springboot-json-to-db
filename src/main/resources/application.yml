@@ -2,8 +2,8 @@ server:
   port: 8080
 
 env:
-  folder: C:\Users\user\Desktop\test\
-  # folder: \\172.16.150.135\2_팀 공유 폴더\2) 학습 DATAset_Superb AI\Export 다운로드 버전\
+  # folder: C:\Users\user\Desktop\test\
+  folder: \\172.16.150.135\2_팀 공유 폴더\2) 학습 DATAset_Superb AI\Export 다운로드 버전\
 
 spring:
   profiles:

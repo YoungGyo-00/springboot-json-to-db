@@ -5,10 +5,21 @@ import com.example.jsontodb.dto.*;
 import com.example.jsontodb.mapper.ResponseMapper;
 import com.example.jsontodb.repository.ObjectRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.awt.*;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -19,11 +30,13 @@ public class ResponseService {
 
     @Transactional
     public ResponseDto response() {
+        try {
+            Object object = objectRepository.findById("15XX-0bf933d1-4d07-4622-af44-373980484fe3").orElseThrow();
+            ResponseDto responseDto = mapper.toDto(object);
 
-        Object object = objectRepository.findById("17318b2b-b743-4f05-8612-a8b78aaef99c").orElseThrow();
-
-        ResponseDto responseDto = mapper.toDto(object);
-
-        return responseDto;
+            return responseDto;
+        } catch (Exception e){
+            return null;
+        }
     }
 }
