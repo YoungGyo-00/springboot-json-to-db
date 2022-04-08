@@ -83,8 +83,14 @@ public class ObjectService {
                 Project project = categoryRepository.findTop1ByClassName((String) object_info.get("class_name"));
                 Meta meta = metaRepository.findByLabelId(file.substring(0, file.length() - 5));
 
+                // 프로젝트 이름
+                String[] project_names = path.split("\\\\");
+                String project_name = project_names[project_names.length - 3].split(" ")[0];
+
+                String id = project_name + "-" + object_info.get("id");
+
                 // DB 저장
-                object.setId((String) object_info.get("id"));
+                object.setId(id);
                 object.setPoints(point.toString());
                 object.setPropertyValue(property_value);
                 object.setMeta(meta);

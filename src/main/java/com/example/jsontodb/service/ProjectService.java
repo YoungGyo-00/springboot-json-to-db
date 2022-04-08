@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Arrays;
 
 @Service
 @RequiredArgsConstructor
@@ -37,6 +38,11 @@ public class ProjectService {
                 JSONArray properties = (JSONArray) object_class.get("properties");
                 JSONObject property = (JSONObject) properties.get(0);
 
+                // 프로젝트 이름
+                String[] project_names = path.split("\\\\");
+                String project_name = project_names[project_names.length -2].split(" ")[0];
+
+                String id = project_name + "-" + object_class.get("id");
                 String property_name = (String) property.get("name");
                 String property_unit = "";
                 switch (property_name) {
@@ -62,7 +68,7 @@ public class ProjectService {
                 }
 
                 // project DB 저장
-                project.setClassId((String) object_class.get("id"));
+                project.setClassId(id);
                 project.setClassName((String) object_class.get("name"));
                 project.setSuperCategory(null);
                 project.setAnnotationType((String) object_class.get("annotation_type"));
@@ -71,6 +77,7 @@ public class ProjectService {
 
                 projectRepository.save(project);
             }
+
         } catch (Exception e) {
             System.out.println(e);
         }

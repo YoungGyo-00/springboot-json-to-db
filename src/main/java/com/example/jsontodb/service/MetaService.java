@@ -50,7 +50,7 @@ public class MetaService {
             meta.setLabelId((String) jsonObject.get("label_id"));
 
             metaRepository.save(meta);
-            return ;
+
         } catch (DataIntegrityViolationException e) {
             System.out.println(path + "파일 DB에 저장됨");
         } catch (FileNotFoundException e) {
