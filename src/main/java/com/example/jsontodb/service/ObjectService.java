@@ -12,6 +12,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -25,12 +26,12 @@ public class ObjectService {
     private final ProjectRepository categoryRepository ;
 
     @Transactional
-    public void save(String path) throws IOException, ParseException {
+    public void save(String path) {
         try {
             Reader reader = new FileReader(path);
-
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
+
             JSONArray objects = (JSONArray) jsonObject.get("objects");
 
             for (java.lang.Object o : objects) {
@@ -40,6 +41,7 @@ public class ObjectService {
                 JSONObject object_info = (JSONObject) o;
                 JSONObject annotation = (JSONObject) object_info.get("annotation");
                 JSONObject coord = (JSONObject) annotation.get("coord");
+
                 // 포인트가 없는 파일은 하나밖에 없어서 상의해봐야함 => 기능 문제
                 JSONArray temp1 = (JSONArray) coord.get("points");
                 JSONArray temp2 = (JSONArray) temp1.get(0);
@@ -60,6 +62,7 @@ public class ObjectService {
                 }
 
                 JSONArray point = new JSONArray();
+
                 for (java.lang.Object p : points) {
                     JSONObject point_info = (JSONObject) p;
                     JSONObject point_temp = new JSONObject();
@@ -80,21 +83,26 @@ public class ObjectService {
                 Project project = categoryRepository.findTop1ByClassName((String) object_info.get("class_name"));
                 Meta meta = metaRepository.findByLabelId(file.substring(0, file.length() - 5));
 
-                object.setPoints(point.toString());
+                // DB 저장
                 object.setId((String) object_info.get("id"));
+                object.setPoints(point.toString());
                 object.setPropertyValue(property_value);
-                object.setProject(project);
                 object.setMeta(meta);
+                object.setProject(project);
 
-                objectRepository.save(object).getId();
+                objectRepository.save(object);
             }
 
         } catch (NullPointerException e) {
             System.out.println(path + " 파일은 meta 파일이 예외");
         } catch (IndexOutOfBoundsException e){
             System.out.println(path + " 파일은 인덱스 바운드 예외");
+        } catch (FileNotFoundException e) {
+            System.out.println(path + " 파일을 못 찾는 예외");
+        } catch (IOException e) {
+            System.out.println(path + " 파일은 IOException");
+        } catch (ParseException e) {
+            System.out.println(path + " 파일은 ParseException");
         }
     }
-
-
 }

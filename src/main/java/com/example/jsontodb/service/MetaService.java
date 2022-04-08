@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -22,22 +23,22 @@ public class MetaService {
     private final MetaRepository metaRepository;
 
     @Transactional
-    public void save(String path) throws IOException, ParseException {
+    public void save(String path) {
         try{
             Reader reader = new FileReader(path);
-
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
             int height = 0;
             int width = 0;
+
             try {
                 JSONObject image_info = (JSONObject) jsonObject.get("image_info");
 
                 height = Integer.parseInt(String.valueOf(image_info.get("height")));
                 width = Integer.parseInt(String.valueOf(image_info.get("width")));
             } catch (NumberFormatException e){
-
+                System.out.println(e);
             }
 
             Meta meta = new Meta();
@@ -52,6 +53,12 @@ public class MetaService {
             return ;
         } catch (DataIntegrityViolationException e) {
             System.out.println(path + "파일 DB에 저장됨");
+        } catch (FileNotFoundException e) {
+            System.out.println(path + " 파일을 못 찾는 예외");
+        } catch (IOException e) {
+            System.out.println(path + " 파일은 IOException");
+        } catch (ParseException e) {
+            System.out.println(path + " 파일은 ParseException");
         }
     }
 }
