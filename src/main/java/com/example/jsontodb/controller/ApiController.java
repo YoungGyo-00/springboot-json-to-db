@@ -38,52 +38,22 @@ public class ApiController {
 
     @ApiOperation(value = "Meta 폴더 DB 저장 용도", notes = "Object 파일보다 먼저 실행")
     @GetMapping("/meta")
-    public String meta() throws IOException, ParseException {
-
-        path("\\meta\\", 3).forEach(p -> {
-            try {
-                metaService.save(p);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        });
-
+    public String meta() throws IOException{
+        path("\\meta\\", 3).forEach(p -> metaService.save(p));
         return "성공";
     }
 
     @ApiOperation(value = "Object 파일 DB 저장 용도", notes = "Meta, category 파일 먼저 저장한 후 실행")
     @GetMapping("/object")
-    public String object() throws IOException, ParseException {
-
-        path("\\labels\\", 2).forEach(p -> {
-            try {
-                objectService.save(p);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        });
-
+    public String object() throws IOException {
+        path("\\labels\\", 2).forEach(p -> objectService.save(p));
         return "성공";
     }
 
     @ApiOperation(value = "Object 파일 DB 저장 용도", notes = "Meta, category 파일 먼저 저장한 후 실행")
     @GetMapping("/project")
-    public String project() throws IOException, ParseException {
-
-        path("\\\\", 1).forEach(p -> {
-            try {
-                projectService.save(p);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        });
-
+    public String project() throws IOException {
+        path("\\\\", 1).forEach(p -> projectService.save(p));
         return "성공";
     }
 
