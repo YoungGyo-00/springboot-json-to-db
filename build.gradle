@@ -21,15 +21,17 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
+    // DB
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
 
+    // JSON Parser
     implementation 'com.google.code.gson:gson:2.8.7'
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-    implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 
     // lombok && mapstruct
     implementation 'org.projectlombok:lombok'

@@ -172,14 +172,7 @@ analyze table meta;
 * <u>실행 오류</u>
   * [java.lang.IllegalStateException: Failed to retrieve PlatformTransactionManager for @Transactional test](https://velog.io/@hanblueblue/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B83-4.-%EB%B2%84%EA%B7%B8-%EC%88%98%EC%A0%95)
   * [@WebMvcTest 단위 테스트 시 Bean 주입 에러](https://velog.io/@gillog/SpringBoot-WebMvcTest-%EB%8B%A8%EC%9C%84-%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%8B%9C-Bean-%EC%A3%BC%EC%9E%85-%EC%97%90%EB%9F%AC)
-
-## API 명세서
-* [Notion - 크라우드 소싱 웹 개발 API 포함](https://shade-sled-bf2.notion.site/API-b11de231685246b49f97d96a4e6887da)
-
-## Agile Scrum
-* [Notion - Agile Scrum (1) - 2022.03.04](https://shade-sled-bf2.notion.site/Agile-Scrum-1-2022-03-04-ad266c5dedfd433da88c26556c9ea876)
-* [Notion - Agile Scrum (2) - 2022.04.01](https://shade-sled-bf2.notion.site/Agile-Scrum-2-2022-04-01-a1fcfb323b9a4ce8acb89a00d7566899)
-* [Notion - Agile Scrum (3) - 2022.04.06](https://shade-sled-bf2.notion.site/Agile-Scrum-2-2022-04-06-8e472c03f070477fbe957e4d00634c51)
+  
 
 ## 높고 높은 벽..
 * Spring JPA Auto DDL generation 실행하면, 알파벳 순서로 정렬..
@@ -224,25 +217,5 @@ analyze table meta;
 * DB size 측정 기준 및 파티셔닝 기준 + 성능 측면
 * slf4j
 
-
-## 참고 자료
-* [PK int vs varchar 1 - stackoverflow](https://stackoverflow.com/questions/2103322/varchar-as-foreign-key-primary-key-in-database-good-or-bad%20)
-* [PK int vs varchar 2 - stackoverflow](https://stackoverflow.com/questions/3162202/sql-primary-key-integer-vs-varchar)
-* [Folder Files 가져오기](https://codechacha.com/ko/java-list-files/)
-* [Array in MySQL Databases - stackoverflow](https://stackoverflow.com/questions/10686333/save-array-in-mysql-database/32664559)
-* [MySQL TEXT vs BLOB vs CLOB 성능 관점, 사용성 관점](https://stackoverflow.com/questions/7071662/mysql-text-vs-blob-vs-clob)
-* [DB Row Size 구하는 쿼리](https://wizardee.tistory.com/146)
-* [Analyze-Table doc](https://dev.mysql.com/doc/refman/5.6/en/analyze-table.html)
-* [DTO - 사용 범위에 대하여](https://xlffm3.github.io/spring%20&%20spring%20boot/DTOLayer/)
-* [DTO - 어느 레이어까지 사용하는 것이 맞을까?](https://www.slipp.net/questions/93)
-* [Entity To DTO Conversion for a Spring REST API](https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application)
-* [스프링 부트 통합테스트 방법과 팁](https://galid1.tistory.com/735)
-* [MapStruct 사용 방법](https://kth990303.tistory.com/131)
-* [MapStruct DTO 안에 DTO](https://ryumodrn.tistory.com/26)
-* [MapStruct 1.4.2 guide PDF](https://mapstruct.org/documentation/stable/reference/pdf/mapstruct-reference-guide.pdf)
-* [높고 높은 벽 JPA Auto DDL 설정 시 참고했던 자료 1](https://pravusid.kr/java/2018/10/10/spring-database-initialization.html)
-* [높고 높은 벽 JPA Auto DDL 설정 시 참고했던 자료 2](https://leveloper.tistory.com/38)
-* [높고 높은 벽 JPA 데이터베이스 초기화 doc](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.data-initialization)
-* [특정 경로의 하위 파일, 폴더 탐색(File.walk)](https://codechacha.com/ko/java-traverse-directory/)
-* [Stream 사용 list 합치기](https://jekal82.tistory.com/60)
-* [Controller 전역 예외 처리](https://jeong-pro.tistory.com/195)
+## 추가 링크
+* 
