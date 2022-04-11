@@ -4,6 +4,7 @@ import com.example.jsontodb.domain.Meta;
 import com.example.jsontodb.domain.Object;
 import com.example.jsontodb.domain.Project;
 import com.example.jsontodb.dto.MetaDto;
+import com.example.jsontodb.dto.PointDto;
 import com.example.jsontodb.dto.ProjectDto;
 import com.example.jsontodb.dto.ResponseDto;
 import org.mapstruct.Mapper;

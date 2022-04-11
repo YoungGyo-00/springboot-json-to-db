@@ -91,7 +91,7 @@ public class ObjectService {
 
                 // DB 저장
                 object.setId(id);
-                object.setPoints(point.toString());
+                object.setPoints(point.toJSONString());
                 object.setPropertyValue(property_value);
                 object.setMeta(meta);
                 object.setProject(project);
