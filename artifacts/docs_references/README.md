@@ -22,4 +22,5 @@
 * [높고 높은 벽 JPA 데이터베이스 초기화 doc](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.data-initialization)
 * [특정 경로의 하위 파일, 폴더 탐색(File.walk)](https://codechacha.com/ko/java-traverse-directory/)
 * [Stream 사용 list 합치기](https://jekal82.tistory.com/60)
+* [Builder 패턴의 사용 이유(setter 지양)](https://velog.io/@hope1213/Setter-%EC%82%AC%EC%9A%A9%EC%9D%84-%EC%99%9C-%EC%A7%80%EC%96%91%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C)
 * [Controller 전역 예외 처리](https://jeong-pro.tistory.com/195)

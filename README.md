@@ -216,6 +216,10 @@ analyze table meta;
 * Mockmvc + Unit Test 방법
 * DB size 측정 기준 및 파티셔닝 기준 + 성능 측면
 * slf4j
+* Builder 패턴 (setter 사용 지양)
+  * 빌더 패턴은 생성자 패턴의 안정성과 자바빈즈 패턴의 가독성을 겸비한 패턴
+  * 의도하지 않은 포인트에서 setter의 사용으로 데이터가 변하게 되는걸 막기 위해
+  * 
 
 ## 추가 링크
 * [프로젝트 관리를 위한 문서들](https://github.com/YoungGyo-00/springboot-json-to-db/tree/master/artifacts/docs_managements)

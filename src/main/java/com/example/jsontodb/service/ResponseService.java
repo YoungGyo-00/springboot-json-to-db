@@ -41,7 +41,7 @@ public class ResponseService {
             String s = object.getPoints();
             JSONArray points = (JSONArray) parser.parse(s);
 
-            List<PointDto> point_temp = new ArrayList<>();
+            List<PointDto> point_arr = new ArrayList<>();
 
             for (java.lang.Object o : points) {
                 JSONObject point = (JSONObject) o;
@@ -51,10 +51,10 @@ public class ResponseService {
                         .y(Integer.parseInt(String.valueOf(point.get("y"))))
                         .build();
 
-                point_temp.add(pointDto);
+                point_arr.add(pointDto);
             }
 
-            responseDto.setPoints(point_temp);
+            responseDto.setPoints(point_arr);
 
             return responseDto;
         } catch (Exception e){
