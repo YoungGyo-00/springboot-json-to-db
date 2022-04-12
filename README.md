@@ -164,7 +164,7 @@ analyze table meta;
   * 엔티티와 DTO 간에 변환할 때 자동 매핑 라이브러리
   * `ModelMapper`보다 매핑 속도가 빠름
   
-### 10. `Unit Test`
+### 10. `Integration Test`
 * `JUint` : 테스트 도구
 * `@SpringBootTest` : 실제 DB와 connection 진행되는 Live Test 방법
 * `Service`에서 JSON Value DB에 정확하게 들어갔는지 확인

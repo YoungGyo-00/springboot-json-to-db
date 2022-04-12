@@ -54,7 +54,7 @@ class AllServiceTest extends BaseIntegrationTest {
         Object object = objectRepository.findById(id).orElseThrow();
         Meta meta = metaRepository.findByLabelId(file);
 
-        assertEquals(object.getCategory().getId(), class_id);
+        assertEquals(object.getProject().getClassId(), class_id);
         assertEquals(object.getMeta().getId(), meta.getId());
         assertEquals(object.getPropertyValue(), property_value);
 

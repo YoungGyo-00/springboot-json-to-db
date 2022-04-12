@@ -12,3 +12,4 @@
 * [Notion - Agile Scrum (1) - 2022.03.04](https://shade-sled-bf2.notion.site/Agile-Scrum-1-2022-03-04-ad266c5dedfd433da88c26556c9ea876)
 * [Notion - Agile Scrum (2) - 2022.04.01](https://shade-sled-bf2.notion.site/Agile-Scrum-2-2022-04-01-a1fcfb323b9a4ce8acb89a00d7566899)
 * [Notion - Agile Scrum (3) - 2022.04.06](https://shade-sled-bf2.notion.site/Agile-Scrum-2-2022-04-06-8e472c03f070477fbe957e4d00634c51)
+* [Notion - Table Description](https://shade-sled-bf2.notion.site/Table-description-d3eba253e13e47e89f555458813f5c83)
