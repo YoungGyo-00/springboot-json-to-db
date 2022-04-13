@@ -33,28 +33,11 @@ public class ResponseService {
     @Transactional
     public ResponseDto response() {
         try {
-            Object object = objectRepository.findById("82XX-17318b2b-b743-4f05-8612-a8b78aaef99c").orElseThrow();
+            Object object = objectRepository.findById("21XX-8d91d2b3-e4d3-4d04-9993-b34bbf6a8165").orElseThrow();
             ResponseDto responseDto = mapper.toDto(object);
 
-            JSONParser parser = new JSONParser();
-
-            String s = object.getPoints();
-            JSONArray points = (JSONArray) parser.parse(s);
-
-            List<PointDto> point_arr = new ArrayList<>();
-
-            for (java.lang.Object o : points) {
-                JSONObject point = (JSONObject) o;
-
-                PointDto pointDto = PointDto.builder()
-                        .x(Integer.parseInt(String.valueOf(point.get("x"))))
-                        .y(Integer.parseInt(String.valueOf(point.get("y"))))
-                        .build();
-
-                point_arr.add(pointDto);
-            }
-
-            responseDto.setPoints(point_arr);
+            responseDto.getAnnotations().getProperty().setUnit(object.getProject().getPropertyUnit());
+            responseDto.getAnnotations().getProperty().setName(object.getProject().getPropertyName());
 
             return responseDto;
         } catch (Exception e){

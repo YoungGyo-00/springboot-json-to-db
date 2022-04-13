@@ -58,9 +58,11 @@ public class ProjectService {
                     String property_unit = "";
                     switch (property_name) {
                         case "Volume" :
-                        case "volume" : property_unit = "cm";
+                        case "volume" : property_unit = "ml";
                             break;
-                        case "Length" : property_unit = "wh";
+                        case "Length" : property_unit = "cm";
+                            break;
+                        case "weight" : property_unit = "g";
                             break;
                         case "Watt-hour" : property_unit = "wh";
                             break;

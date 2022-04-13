@@ -8,22 +8,13 @@ import lombok.Data;
 @Builder
 public class ProjectDto {
 
-    @JsonProperty(value = "class_id")
-    private String classId;
-
-    @JsonProperty(value = "class_name")
-    private String className;
-
-    @JsonProperty(value = "super_category")
+    @JsonProperty(value = "supercategory")
     private String superCategory;
 
-    @JsonProperty(value = "annotation_type")
-    private String annotationType;
+    @JsonProperty(value = "id")
+    private String classId;
 
-    @JsonProperty(value = "property_name")
-    private String propertyName;
-
-    @JsonProperty(value = "property_unit")
-    private String propertyUnit;
+    @JsonProperty(value = "name")
+    private String className;
 
 }

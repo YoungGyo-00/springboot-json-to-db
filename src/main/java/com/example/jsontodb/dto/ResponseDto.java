@@ -9,19 +9,16 @@ import java.util.List;
 
 @Data
 @Builder
-@JsonPropertyOrder({"id", "propertyValue", "points", "meta", "project"})
 public class ResponseDto {
 
-    @JsonProperty(value = "object_id")
-    private String id;
+    private InfoDto info;
 
-    @JsonProperty(value = "property_value")
-    private int propertyValue;
-
-    private List<PointDto> points;
-
+    @JsonProperty(value = "image")
     private MetaDto meta;
 
+    private AnnotationDto annotations;
+
+    @JsonProperty(value = "categories")
     private ProjectDto project;
 
 }

@@ -3,75 +3,56 @@ package com.example.jsontodb.mapper;
 import com.example.jsontodb.domain.Meta;
 import com.example.jsontodb.domain.Object;
 import com.example.jsontodb.domain.Project;
+import com.example.jsontodb.dto.AnnotationDto;
 import com.example.jsontodb.dto.MetaDto;
-import com.example.jsontodb.dto.PointDto;
 import com.example.jsontodb.dto.ProjectDto;
 import com.example.jsontodb.dto.ResponseDto;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.mapstruct.*;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = {LocalDateTime.class})
 public interface ResponseMapper extends GenericMapper<ResponseDto, Object> {
+
     @Override
-    /*@Mappings({
-            @Mapping(source = "meta", target = "meta"),
-            @Mapping(source = "project", target = "project")})*/
-    default ResponseDto toDto(Object object){
-        if ( object == null ) {
-            return null;
+    @Mapping(target = "annotations.id", source = "id")
+    @Mapping(target = "annotations.property.value", source = "propertyValue")
+    @Mapping(target = "annotations.points", source = "points", qualifiedByName = "points")
+    @Mapping(target = "info.version", constant = "1.0.0")
+    @Mapping(target = "info.dateCreated", expression = "java(LocalDateTime.now())")
+    @Mapping(target = "meta.fileName", source = "meta.id", qualifiedByName = "fileName")
+    ResponseDto toDto(Object object);
+
+    @Named("points")
+    default List<AnnotationDto.PointDto> points(String point_info) throws ParseException {
+        JSONParser parser = new JSONParser();
+
+        JSONArray points = (JSONArray) parser.parse(point_info);
+
+        List<AnnotationDto.PointDto> point_arr = new ArrayList<>();
+
+        for (java.lang.Object o : points) {
+            JSONObject point = (JSONObject) o;
+
+            AnnotationDto.PointDto pointDto = AnnotationDto.PointDto.builder()
+                    .x(Integer.parseInt(String.valueOf(point.get("x"))))
+                    .y(Integer.parseInt(String.valueOf(point.get("y"))))
+                    .build();
+
+            point_arr.add(pointDto);
         }
 
-        ResponseDto.ResponseDtoBuilder responseDto = ResponseDto.builder();
-
-        responseDto.meta( metaToMetaDto( object.getMeta() ) );
-        responseDto.project( projectToProjectDto( object.getProject() ) );
-        responseDto.id( object.getId() );
-        responseDto.propertyValue( object.getPropertyValue() );
-
-        return responseDto.build();
-    };
-
-    default MetaDto metaToMetaDto(Meta meta) {
-        if ( meta == null ) {
-            return null;
-        }
-
-        MetaDto.MetaDtoBuilder metaDto = MetaDto.builder();
-
-        metaDto.id( meta.getId() );
-        metaDto.labelId( meta.getLabelId() );
-        metaDto.image_info( imageInfoToImageDto( meta.getHeight(), meta.getWidth()));
-
-        return metaDto.build();
+        return point_arr;
     }
 
-    default ProjectDto projectToProjectDto(Project project) {
-        if ( project == null ) {
-            return null;
-        }
-
-        ProjectDto.ProjectDtoBuilder projectDto = ProjectDto.builder();
-
-        projectDto.classId( project.getClassId() );
-        projectDto.className( project.getClassName() );
-        projectDto.superCategory( project.getSuperCategory() );
-        projectDto.annotationType( project.getAnnotationType() );
-        projectDto.propertyName( project.getPropertyName() );
-        projectDto.propertyUnit( project.getPropertyUnit() );
-
-        return projectDto.build();
-    }
-
-    default MetaDto.ImageDto imageInfoToImageDto(int height, int width) {
-
-        MetaDto.ImageDto imageDto = MetaDto.ImageDto.builder()
-                .height(height)
-                .width(width)
-                .build();
-
-        return imageDto;
+    @Named("fileName")
+    default String fileName(String id) {
+        return id.split("-")[1];
     }
 }

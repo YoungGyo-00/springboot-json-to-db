@@ -1,0 +1,18 @@
+package com.example.jsontodb.dto;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Data;
+
+import java.time.LocalDateTime;
+
+@Data
+@Builder
+public class InfoDto {
+
+    private String version;
+
+    @JsonProperty(value = "date_created")
+    private LocalDateTime dateCreated;
+
+}
