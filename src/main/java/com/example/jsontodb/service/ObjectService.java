@@ -67,8 +67,8 @@ public class ObjectService {
                     JSONObject point_info = (JSONObject) p;
                     JSONObject point_temp = new JSONObject();
 
-                    int x = (int) Math.round(Double.parseDouble(String.valueOf(point_info.get("x"))));
-                    int y = (int) Math.round(Double.parseDouble(String.valueOf(point_info.get("y"))));
+                    double x = Math.round(Double.parseDouble(String.valueOf(point_info.get("x")))*100.0)/100.0;
+                    double y = Math.round(Double.parseDouble(String.valueOf(point_info.get("y")))*100.0)/100.0;
 
                     point_temp.put("x", x);
                     point_temp.put("y", y);

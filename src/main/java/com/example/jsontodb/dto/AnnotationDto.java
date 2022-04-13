@@ -34,8 +34,8 @@ public class AnnotationDto {
     @Builder
     public static class PointDto {
 
-        private int x;
+        private float x;
 
-        private int y;
+        private float y;
     }
 }

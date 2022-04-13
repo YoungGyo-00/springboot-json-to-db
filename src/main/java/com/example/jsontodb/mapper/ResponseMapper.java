@@ -41,8 +41,8 @@ public interface ResponseMapper extends GenericMapper<ResponseDto, Object> {
             JSONObject point = (JSONObject) o;
 
             AnnotationDto.PointDto pointDto = AnnotationDto.PointDto.builder()
-                    .x(Integer.parseInt(String.valueOf(point.get("x"))))
-                    .y(Integer.parseInt(String.valueOf(point.get("y"))))
+                    .x(Float.parseFloat(String.valueOf(point.get("x"))))
+                    .y(Float.parseFloat(String.valueOf(point.get("y"))))
                     .build();
 
             point_arr.add(pointDto);
@@ -55,4 +55,5 @@ public interface ResponseMapper extends GenericMapper<ResponseDto, Object> {
     default String fileName(String id) {
         return id.split("-")[1];
     }
+
 }
