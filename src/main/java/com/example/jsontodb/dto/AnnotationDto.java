@@ -19,6 +19,9 @@ public class AnnotationDto {
     @JsonProperty(value = "segmentation")
     private List<PointDto> points;
 
+    @JsonProperty(value = "category_id")
+    private String categoryId;
+
     @Data
     @Builder
     public static class PropertyDto {

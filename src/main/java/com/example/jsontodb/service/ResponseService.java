@@ -38,6 +38,7 @@ public class ResponseService {
 
             responseDto.getAnnotations().getProperty().setUnit(object.getProject().getPropertyUnit());
             responseDto.getAnnotations().getProperty().setName(object.getProject().getPropertyName());
+            responseDto.getAnnotations().setCategoryId(object.getProject().getClassId());
 
             return responseDto;
         } catch (Exception e){

@@ -9,6 +9,7 @@ import java.util.List;
 
 @Data
 @Builder
+@JsonPropertyOrder({"info", "meta", "annotations", "project"})
 public class ResponseDto {
 
     private InfoDto info;
