@@ -8,7 +8,9 @@ import com.example.jsontodb.repository.MetaRepository;
 import com.example.jsontodb.repository.ObjectRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
@@ -59,45 +61,53 @@ public class ResponseService {
     }
 
     @Transactional
-    public void write() throws IOException {
+    public void write() {
 
-        for (Meta meta : metaRepository.findAll()) {
+        try {
+            for (Meta meta : metaRepository.findAll()) {
 
-            JSONArray arr = new JSONArray();
+                JSONArray arr = new JSONArray();
 
-            for (Object object : objectRepository.findByMetaId(meta.getId())) {
-                try {
+                for (Object object : objectRepository.findByMetaId(meta.getId())) {
+                    try {
 
-                    ResponseDto responseDto = mapper.toDto(object);
+                        ResponseDto responseDto = mapper.toDto(object);
 
-                    responseDto.getAnnotations().getProperty().setUnit(object.getProject().getPropertyUnit());
-                    responseDto.getAnnotations().getProperty().setName(object.getProject().getPropertyName());
-                    responseDto.getAnnotations().setCategoryId(object.getProject().getClassId());
+                        responseDto.getAnnotations().getProperty().setUnit(object.getProject().getPropertyUnit());
+                        responseDto.getAnnotations().getProperty().setName(object.getProject().getPropertyName());
+                        responseDto.getAnnotations().setCategoryId(object.getProject().getClassId());
 
-                    arr.add(responseDto);
+                        arr.add(responseDto);
 
-                } catch (Exception e) {
-                    System.out.println(object.getId());
-                    System.out.println(e);
+                    } catch (Exception e) {
+                        System.out.println(object.getId());
+                        System.out.println(e);
+                    }
                 }
+
+                ObjectMapper objectMapper = new ObjectMapper();
+                ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
+
+
+                String json = meta.getId();
+                String folder = path + json.split("-")[0] + "\\";
+                String file_name = json.split("-")[1].substring(0, json.length() - folder.length() + path.length() - 4) + ".json";
+
+                File dir = new File(folder);
+                if (!dir.exists()) {
+                    dir.mkdir();
+                }
+
+                FileWriter fw = new FileWriter(folder + file_name);
+
+                writer.writeValue(fw, arr);
+
+                fw.close();
             }
-
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-            String json = meta.getId();
-            String folder = path + json.split("-")[0] + "\\";
-            String file_name = json.split("-")[1].substring(0, json.length() - folder.length() + path.length() - 4) + ".json";
-
-            File dir = new File(folder);
-            if (!dir.exists()) {
-                dir.mkdir();
-            }
-            FileWriter fw = new FileWriter(folder + file_name);
-            gson.toJson(arr, fw);
-
-            fw.flush();
-            fw.close();
+        } catch (Exception e) {
+            System.out.println(e);
         }
+
 
         return;
 
