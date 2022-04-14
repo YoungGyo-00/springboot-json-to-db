@@ -68,7 +68,7 @@ public class ApiController {
 
     @ApiOperation(value = "JSON 파일 쓰기")
     @GetMapping("/write")
-    public String write() {
+    public String write() throws IOException {
         responseService.write();
         return "성공";
     }

@@ -1,8 +1,10 @@
 package com.example.jsontodb.service;
 
+import com.example.jsontodb.domain.Meta;
 import com.example.jsontodb.domain.Object;
 import com.example.jsontodb.dto.*;
 import com.example.jsontodb.mapper.ResponseMapper;
+import com.example.jsontodb.repository.MetaRepository;
 import com.example.jsontodb.repository.ObjectRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -21,6 +23,7 @@ import springfox.documentation.spring.web.json.Json;
 import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
@@ -32,6 +35,7 @@ import java.util.List;
 public class ResponseService {
     
     private final ObjectRepository objectRepository;
+    private final MetaRepository metaRepository;
     private final ResponseMapper mapper;
 
     @Value("${env.write}")
@@ -55,8 +59,49 @@ public class ResponseService {
     }
 
     @Transactional
-    public void write() {
-        for (Object object : objectRepository.findAll()) {
+    public void write() throws IOException {
+
+        for (Meta meta : metaRepository.findAll()) {
+
+            JSONArray arr = new JSONArray();
+
+            for (Object object : objectRepository.findByMetaId(meta.getId())) {
+                try {
+
+                    ResponseDto responseDto = mapper.toDto(object);
+
+                    responseDto.getAnnotations().getProperty().setUnit(object.getProject().getPropertyUnit());
+                    responseDto.getAnnotations().getProperty().setName(object.getProject().getPropertyName());
+                    responseDto.getAnnotations().setCategoryId(object.getProject().getClassId());
+
+                    arr.add(responseDto);
+
+                } catch (Exception e) {
+                    System.out.println(object.getId());
+                    System.out.println(e);
+                }
+            }
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+            String json = meta.getId();
+            String folder = path + json.split("-")[0] + "\\";
+            String file_name = json.split("-")[1].substring(0, json.length() - folder.length() + path.length() - 4) + ".json";
+
+            File dir = new File(folder);
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            FileWriter fw = new FileWriter(folder + file_name);
+            gson.toJson(arr, fw);
+
+            fw.flush();
+            fw.close();
+        }
+
+        return;
+
+        /*for (Object object : objectRepository.findAll()) {
             try {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -81,10 +126,11 @@ public class ResponseService {
                 fw.close();
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println(object.getId());
+                System.out.println(e);
             }
         }
 
-        return;
+        return;*/
     }
 }
