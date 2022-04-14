@@ -66,6 +66,13 @@ public class ApiController {
         return responseService.response();
     }
 
+    @ApiOperation(value = "JSON 파일 쓰기")
+    @GetMapping("/write")
+    public String write() {
+        responseService.write();
+        return "성공";
+    }
+
     // 파일 경로 리스트 반환
     public List<String> path(String file_type, int max_depth) throws IOException {
 
