@@ -66,10 +66,17 @@ public class ApiController {
         return responseService.response();
     }
 
-    @ApiOperation(value = "JSON 파일 쓰기")
-    @GetMapping("/write")
-    public String write() throws IOException {
-        responseService.write();
+    @ApiOperation(value = "JSON 파일 쓰기 v1")
+    @GetMapping("/write_v1")
+    public String write_v1() throws IOException {
+        responseService.write_v1();
+        return "성공";
+    }
+
+    @ApiOperation(value = "JSON 파일 쓰기 v2")
+    @GetMapping("/write_v2")
+    public String write_v2() throws IOException {
+        responseService.write_v2();
         return "성공";
     }
 
