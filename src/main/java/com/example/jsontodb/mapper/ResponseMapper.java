@@ -1,13 +1,8 @@
 package com.example.jsontodb.mapper;
 
-import com.example.jsontodb.domain.Meta;
 import com.example.jsontodb.domain.Object;
-import com.example.jsontodb.domain.Project;
 import com.example.jsontodb.dto.AnnotationDto;
-import com.example.jsontodb.dto.MetaDto;
-import com.example.jsontodb.dto.ProjectDto;
 import com.example.jsontodb.dto.ResponseDto;
-import org.apache.tomcat.jni.Local;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

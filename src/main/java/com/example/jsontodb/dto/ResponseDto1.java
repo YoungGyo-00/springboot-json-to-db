@@ -1,22 +1,18 @@
 package com.example.jsontodb.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Builder;
 import lombok.Data;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import java.util.List;
 
 @Data
 @Builder
 @JsonPropertyOrder({"info", "image", "annotations", "categories"})
-public class ResponseDto2 {
+public class ResponseDto1 {
 
-    private JSONObject info;
+    private InfoDto info;
 
-    private JSONArray image;
+    private MetaDto image;
 
     private JSONArray annotations;
 
