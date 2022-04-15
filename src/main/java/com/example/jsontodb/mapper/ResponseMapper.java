@@ -7,6 +7,7 @@ import com.example.jsontodb.dto.AnnotationDto;
 import com.example.jsontodb.dto.MetaDto;
 import com.example.jsontodb.dto.ProjectDto;
 import com.example.jsontodb.dto.ResponseDto;
+import org.apache.tomcat.jni.Local;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,6 +15,7 @@ import org.json.simple.parser.ParseException;
 import org.mapstruct.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public interface ResponseMapper extends GenericMapper<ResponseDto, Object> {
     @Mapping(target = "annotations.property.value", source = "propertyValue")
     @Mapping(target = "annotations.points", source = "points", qualifiedByName = "points")
     @Mapping(target = "info.version", constant = "1.0.0")
-//    @Mapping(target = "info.dateCreated", expression = "java(LocalDateTime.now())")
+    @Mapping(target = "info.dateCreated", expression = "java(dateCreated())")
     @Mapping(target = "meta.fileName", source = "meta.id", qualifiedByName = "fileName")
     ResponseDto toDto(Object object);
 
@@ -54,6 +56,11 @@ public interface ResponseMapper extends GenericMapper<ResponseDto, Object> {
     @Named("fileName")
     default String fileName(String id) {
         return id.split("-")[1];
+    }
+
+    @Named("dateCreated")
+    default String dateCreated() {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     }
 
 }

@@ -14,7 +14,7 @@ public class InfoDto {
     private String version;
 
     @JsonProperty(value = "date_created")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
-    private LocalDateTime dateCreated;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+    private String dateCreated;
 
 }
