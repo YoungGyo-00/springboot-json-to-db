@@ -29,7 +29,7 @@ public class AnnotationDto {
 
         private String name;
 
-        private int value;
+        private Integer value;
 
         private String unit;
     }

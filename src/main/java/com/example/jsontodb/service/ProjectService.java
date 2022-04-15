@@ -68,17 +68,9 @@ public class ProjectService {
                             break;
                         case "Gram" : property_unit = "Gram";
                             break;
-                        case "Gravity" : property_unit = "Gr";
-                            break;
-                        case "Other beverage Property" : property_unit = "Oh";
-                            break;
-                        case "Instant curry Property" : property_unit = "I";
-                            break;
-                        case "Other glue, adhesive Property" : property_unit = "O";
-                            break;
                         case "Null" : property_unit = "N";
                             break;
-                        default: property_unit = "?";
+                        default: property_unit = "N";
                     }
 
                     project.setPropertyName(property_name);

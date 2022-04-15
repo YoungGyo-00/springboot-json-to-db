@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -150,7 +151,7 @@ public class ResponseService {
 
                         annotations.add(objectToAnotationDto(object));
 
-                    } catch (Exception e) {
+                    } catch (ParseException e) {
                         System.out.println(object.getId());
                         System.out.println(e);
                     }
@@ -186,7 +187,7 @@ public class ResponseService {
 
                 fw.close();
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }

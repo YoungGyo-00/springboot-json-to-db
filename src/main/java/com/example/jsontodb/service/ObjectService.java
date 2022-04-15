@@ -50,14 +50,13 @@ public class ObjectService {
                 // 값이 없는 것도 있음, empty -> -1, null -> -2
                 JSONArray properties = (JSONArray) object_info.get("properties");
 
-                int property_value = -1;
+                Integer property_value = null;
 
                 if (properties.size() != 0) {
                     JSONObject property = (JSONObject) properties.get(0);
                     try {
                         property_value = Integer.parseInt(String.valueOf(property.get("value")));
                     } catch (NumberFormatException e) {
-                        property_value = -2;
                     }
                 }
 
@@ -80,12 +79,13 @@ public class ObjectService {
                 String[] file_arr = path.split("\\\\");
                 String file = file_arr[file_arr.length - 1];
 
-                Project project = categoryRepository.findTop1ByClassName((String) object_info.get("class_name"));
-                Meta meta = metaRepository.findByLabelId(file.substring(0, file.length() - 5));
-
                 // 프로젝트 이름
                 String[] project_names = path.split("\\\\");
                 String project_name = project_names[project_names.length - 3].split(" ")[0];
+
+                Project project = categoryRepository.findByClassId(project_name + "-" + object_info.get("class_id"));
+
+                Meta meta = metaRepository.findByLabelId(file.substring(0, file.length() - 5));
 
                 String id = project_name + "-" + object_info.get("id");
 

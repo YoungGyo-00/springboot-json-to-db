@@ -15,7 +15,7 @@ public class Object {
     private String id;
 
     @Column(length = 3)
-    private int propertyValue;
+    private Integer propertyValue;
 
     @Column(length = 20000)
     private String points;
