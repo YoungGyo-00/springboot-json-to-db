@@ -21,13 +21,13 @@
 
 ## 개발 순서
 ### 1. `DB 연동 (MySQL)`
-### - `ERD` 1차(수정)
+### - `ERD` 최초(수정)
 ![ERD 최조 설계](artifacts/docs_img/ERD_1차.png)
 
 
-### - `ERD` 2차
+### - `ERD` 4차
 
-![ERD 수정](artifacts/docs_img/ERD_3차_2022.04.07.png)
+![ERD 수정](artifacts/docs_img/ERD_4차_2022.04.18.png)
   * list DB에 저장할 경우 -> ex) `point`
     1. String 변환 후 저장 : 문자열이 길어지면 저장 못할 수 있음
     2. Table 하나 생성 후 Join : Join 쿼리 날리는 비용 계산
@@ -202,6 +202,9 @@ analyze table meta;
 
 * `int` vs `Integar`
   * `Null` 저장 가능 여부
+
+
+* DB 저장 시 createdAt, updatedAt 필수
   
 ## 3000개 파일 저장 시에 발생한 예외 상황
 * Object property value 가 `empty` or `null` 인 경우가 존재함

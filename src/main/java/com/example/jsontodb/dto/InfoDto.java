@@ -13,8 +13,16 @@ public class InfoDto {
 
     private String version;
 
-    @JsonProperty(value = "date_created")
+    @JsonProperty(value = "labeling_time")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
-    private String dateCreated;
+    private String labelingTime;
+
+    @JsonProperty(value = "insert_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+    private String insertDate;
+
+    @JsonProperty(value = "download_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+    private String downloadDate;
 
 }

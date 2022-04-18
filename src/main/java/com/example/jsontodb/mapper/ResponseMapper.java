@@ -22,7 +22,7 @@ public interface ResponseMapper extends GenericMapper<ResponseDto, Object> {
     @Mapping(target = "annotations.property.value", source = "propertyValue")
     @Mapping(target = "annotations.points", source = "points", qualifiedByName = "points")
     @Mapping(target = "info.version", constant = "1.0.0")
-    @Mapping(target = "info.dateCreated", expression = "java(dateCreated())")
+    @Mapping(target = "info.downloadDate", expression = "java(dateCreated())")
     @Mapping(target = "meta.fileName", source = "meta.id", qualifiedByName = "fileName")
     ResponseDto toDto(Object object);
 

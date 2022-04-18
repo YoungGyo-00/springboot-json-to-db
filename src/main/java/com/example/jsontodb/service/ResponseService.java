@@ -113,7 +113,9 @@ public class ResponseService {
 
                 InfoDto info = InfoDto.builder()
                         .version("1.0.0")
-                        .dateCreated(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+                        .labelingTime(meta.getLabelingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+                        .insertDate(meta.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+                        .downloadDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
                         .build();
 
                 MetaDto image = MetaDto.builder()
@@ -250,7 +252,7 @@ public class ResponseService {
         return ProjectDto.builder()
                 .superCategory(project.getSuperCategory())
                 .classId(project.getClassId())
-//                .className(project.getClassName())
+                .className(project.getClassNumber().getClassName())
                 .build();
     }
 
