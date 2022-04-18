@@ -1,24 +1,19 @@
 package com.example.jsontodb.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "project_info")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Project {
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class Project extends BaseTimeEntity{
     @Id
     private String classId;
-
-    private String className;
 
     private String superCategory;
 
@@ -29,4 +24,8 @@ public class Project {
 
     @Column(length = 5)
     private String propertyUnit;
+
+    @ManyToOne
+    @JoinColumn(name = "class_number")
+    private Class classNumber;
 }

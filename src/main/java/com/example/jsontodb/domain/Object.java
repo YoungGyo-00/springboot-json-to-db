@@ -1,8 +1,6 @@
 package com.example.jsontodb.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,7 +8,9 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Object {
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class Object extends BaseTimeEntity{
     @Id
     private String id;
 

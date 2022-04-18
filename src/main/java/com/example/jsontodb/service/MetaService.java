@@ -15,6 +15,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +33,7 @@ public class MetaService {
 
             int height = 0;
             int width = 0;
+            String time = (String) jsonObject.get("last_updated_date");
 
             try {
                 JSONObject image_info = (JSONObject) jsonObject.get("image_info");
@@ -43,11 +46,11 @@ public class MetaService {
 
             Meta meta = new Meta();
 
-            meta.setHeight(height);
-            meta.setWidth(width);
-
             meta.setId(jsonObject.get("dataset") + "-" + jsonObject.get("data_key"));
             meta.setLabelId((String) jsonObject.get("label_id"));
+            meta.setHeight(height);
+            meta.setWidth(width);
+            meta.setLabelingTime(LocalDateTime.parse(time.substring(0, time.length() - 1)));
 
             metaRepository.save(meta);
 
@@ -59,6 +62,8 @@ public class MetaService {
             System.out.println(path + " 파일은 IOException");
         } catch (ParseException e) {
             System.out.println(path + " 파일은 ParseException");
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.example.jsontodb.service;
 
+import com.example.jsontodb.domain.Class;
 import com.example.jsontodb.domain.Project;
+import com.example.jsontodb.repository.ClassRepository;
 import com.example.jsontodb.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
@@ -20,6 +22,7 @@ import java.util.Arrays;
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final ClassRepository classRepository;
 
     @Transactional
     public void save(String path) {
@@ -33,6 +36,7 @@ public class ProjectService {
 
             for (Object o : object_classes){
                 Project project = new Project();
+                Class clazz = new Class();
 
                 JSONObject object_class = (JSONObject) o;
                 JSONArray properties = (JSONArray) object_class.get("properties");
@@ -43,12 +47,14 @@ public class ProjectService {
 
                 String id = project_name + "-" + object_class.get("id");
 
+                // class DB 저장
+                clazz.setClassName((String) object_class.get("name"));
 
                 // project DB 저장
                 project.setClassId(id);
-                project.setClassName((String) object_class.get("name"));
                 project.setSuperCategory(null);
                 project.setAnnotationType((String) object_class.get("annotation_type"));
+                project.setClassNumber(clazz);
 
                 // property 가 존재하지 않은게 있음
                 try {
@@ -68,9 +74,7 @@ public class ProjectService {
                             break;
                         case "Gram" : property_unit = "Gram";
                             break;
-                        case "Null" : property_unit = "N";
-                            break;
-                        default: property_unit = "N";
+                        default: property_unit = null;
                     }
 
                     project.setPropertyName(property_name);
@@ -81,6 +85,7 @@ public class ProjectService {
                     project.setPropertyUnit(null);
                 }
 
+                classRepository.save(clazz);
                 projectRepository.save(project);
             }
 

@@ -250,7 +250,7 @@ public class ResponseService {
         return ProjectDto.builder()
                 .superCategory(project.getSuperCategory())
                 .classId(project.getClassId())
-                .className(project.getClassName())
+//                .className(project.getClassName())
                 .build();
     }
 

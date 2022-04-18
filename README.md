@@ -198,17 +198,23 @@ analyze table meta;
   1. addAll() -> list 합치기
   2. concat() -> stream 합치기
   3. flatMap() -> list 안에 list 합치기
+
+
+* `int` vs `Integar`
+  * `Null` 저장 가능 여부
   
 ## 3000개 파일 저장 시에 발생한 예외 상황
 * Object property value 가 `empty` or `null` 인 경우가 존재함
     * `empty` -> -1 로 일단 대체
     * `null`  -> -2 로 일단 대체
+    * null로 통일
   
 * Meta 30XX A30049099001TNV030O001LV.jpg 값이 안 들어가 있어서 오류
 
 * `javax.persistence.NonUniqueResultException: query did not return a unique result: 2`
   * JPA Repository 쿼리 값이 1개가 아닌 복수 개가 넘어오는 경우
   * limit 설정으로 첫 번째 값만 불러오기로 일단은 해결
+  * classId로 찾으면서 해결
 
 ## 더 공부가 필요한 부분
 * Custom Exception Handling + ResponseEntity

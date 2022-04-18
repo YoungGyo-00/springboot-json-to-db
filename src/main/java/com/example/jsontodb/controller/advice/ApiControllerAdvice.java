@@ -10,8 +10,8 @@ import java.io.IOException;
 public class ApiControllerAdvice {
 
     @ExceptionHandler({IOException.class})
-    public ResponseEntity exFolder() {
-        System.out.println("폴더가 존재하지 않는 오류");
+    public ResponseEntity exFolder(Exception e) {
+        System.out.println(e);
         return ResponseEntity.status(403).body("경로에 폴더가 없음");
     }
 }
