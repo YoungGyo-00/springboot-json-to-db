@@ -6,6 +6,7 @@
 
 ### API 명세서
 * [Notion - 크라우드 소싱 웹 개발 API 포함](https://shade-sled-bf2.notion.site/API-b11de231685246b49f97d96a4e6887da)
+* [Notion - (NIA) 91번 X-ray 다중 객체 인식 데이터 미팅 정리](https://shade-sled-bf2.notion.site/NIA-233cbf29b3d9491b91f66b5d5d0c9f9c)
 
 
 ### Agile Scrum
