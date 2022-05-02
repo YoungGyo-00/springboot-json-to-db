@@ -12,6 +12,6 @@ public class ApiControllerAdvice {
     @ExceptionHandler({IOException.class})
     public ResponseEntity exFolder(Exception e) {
         System.out.println(e);
-        return ResponseEntity.status(403).body("경로에 폴더가 없음");
+        return ResponseEntity.status(403).body("폴더 경로 설정이 잘못됨");
     }
 }

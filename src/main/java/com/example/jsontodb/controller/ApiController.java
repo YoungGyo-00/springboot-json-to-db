@@ -5,15 +5,11 @@ import com.example.jsontodb.service.ObjectService;
 import com.example.jsontodb.service.MetaService;
 import com.example.jsontodb.service.ProjectService;
 import com.example.jsontodb.service.ResponseService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,7 +32,7 @@ public class ApiController {
     @Value("${env.folder}")
     private String folder_path;
 
-    @ApiOperation(value = "Meta 폴더 DB 저장 용도", notes = "Object 파일보다 먼저 실행")
+    @ApiOperation(value = "Meta 폴더 DB 저장(수정) 용도")
     @GetMapping("/meta")
     public String meta() throws IOException{
         System.out.println("meta 파일 실행");
@@ -44,7 +40,7 @@ public class ApiController {
         return "성공";
     }
 
-    @ApiOperation(value = "Object 파일 DB 저장 용도", notes = "Meta, category 파일 먼저 저장한 후 실행")
+    @ApiOperation(value = "Object 파일 DB 저장(수정) 용도", notes = "Meta, category 파일 먼저 저장한 후 실행")
     @GetMapping("/object")
     public String object() throws IOException {
         System.out.println("object 파일 실행");
@@ -52,7 +48,7 @@ public class ApiController {
         return "성공";
     }
 
-    @ApiOperation(value = "Object 파일 DB 저장 용도", notes = "Meta, category 파일 먼저 저장한 후 실행")
+    @ApiOperation(value = "Project 파일 DB 저장(수정) 용도")
     @GetMapping("/project")
     public String project() throws IOException {
         System.out.println("project 파일 실행");
@@ -60,23 +56,26 @@ public class ApiController {
         return "성공";
     }
 
-    @ApiOperation(value = "JSON 파일로 뽑아보기")
+    @ApiOperation(value = "JSON 파일 1개 예시로 보여주기")
     @GetMapping("/response")
     public ResponseDto response() {
         return responseService.response();
     }
 
-    @ApiOperation(value = "JSON 파일 쓰기 v0")
-    @GetMapping("/write_v0")
-    public String write_v0() throws IOException {
-        responseService.write_v0();
-        return "성공";
-    }
-
-    @ApiOperation(value = "JSON 파일 쓰기 v1")
+    @ApiOperation(value = "모든 DB에 있는 DATA -> JSON 파일로 쓰기(계층화된 폴더 구조)")
     @GetMapping("/write_v1")
     public String write_v1() throws IOException {
         responseService.write_v1();
+        return "성공";
+    }
+
+    @ApiOperation(value = "모든 파일 DB에 한번에 저장")
+    @GetMapping("/all")
+    public String all() throws IOException {
+        System.out.println("all 파일 실행");
+        path("\\meta\\", 3).forEach(p -> metaService.save(p));
+        path("\\\\", 1).forEach(p -> projectService.save(p));
+        path("\\labels\\", 2).forEach(p -> objectService.save(p));
         return "성공";
     }
 

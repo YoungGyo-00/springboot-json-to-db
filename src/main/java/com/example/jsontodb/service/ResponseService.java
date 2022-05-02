@@ -56,57 +56,6 @@ public class ResponseService {
     }
 
     @Transactional
-    public void write_v0() {
-
-        try {
-            for (Meta meta : metaRepository.findAll()) {
-                JSONArray arr = new JSONArray();
-
-                for (Object object : objectRepository.findByMetaId(meta.getId())) {
-                    try {
-
-                        ResponseDto responseDto = mapper.toDto(object);
-
-                        responseDto.getAnnotations().getProperty().setUnit(object.getProject().getPropertyUnit());
-                        responseDto.getAnnotations().getProperty().setName(object.getProject().getPropertyName());
-                        responseDto.getAnnotations().setCategoryId(object.getProject().getClassId());
-
-                        arr.add(responseDto);
-
-                    } catch (Exception e) {
-                        System.out.println(object.getId());
-                        System.out.println(e);
-                    }
-                }
-
-                ObjectMapper objectMapper = new ObjectMapper();
-                ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
-
-
-                String json = meta.getId();
-                String folder = path + json.split("-")[0] + "\\";
-                String file_name = json.split("-")[1].substring(0, json.length() - folder.length() + path.length() - 4) + ".json";
-
-                File dir = new File(folder);
-                if (!dir.exists()) {
-                    dir.mkdir();
-                }
-
-                FileWriter fw = new FileWriter(folder + file_name);
-
-                writer.writeValue(fw, arr);
-
-                fw.close();
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-
-        return;
-    }
-
-    @Transactional
     public void write_v1() {
         try {
             for (Meta meta : metaRepository.findAll()) {

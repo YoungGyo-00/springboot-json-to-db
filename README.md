@@ -210,7 +210,7 @@ analyze table meta;
 * Object property value 가 `empty` or `null` 인 경우가 존재함
     * `empty` -> -1 로 일단 대체
     * `null`  -> -2 로 일단 대체
-    * null로 통일
+    * null 통일
   
 * Meta 30XX A30049099001TNV030O001LV.jpg 값이 안 들어가 있어서 오류
 
@@ -227,7 +227,7 @@ analyze table meta;
 * slf4j
 * Builder 패턴 (setter 사용 지양)
   * 빌더 패턴은 생성자 패턴의 안정성과 자바빈즈 패턴의 가독성을 겸비한 패턴
-  * 의도하지 않은 포인트에서 setter의 사용으로 데이터가 변하게 되는걸 막기 위해
+  * 의도하지 않은 포인트에서 setter 사용으로 데이터가 변하게 되는걸 막기 위해
   * 
 
 ## 추가 링크
