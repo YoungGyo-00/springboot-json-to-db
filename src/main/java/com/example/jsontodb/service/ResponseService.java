@@ -61,7 +61,7 @@ public class ResponseService {
             for (Meta meta : metaRepository.findAll()) {
 
                 InfoDto info = InfoDto.builder()
-                        .version("1.0.0")
+                        .version("1.0.0") // 버전 변경 시, 수정
                         .labelingTime(meta.getLabelingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
                         .insertDate(meta.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
                         .downloadDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))

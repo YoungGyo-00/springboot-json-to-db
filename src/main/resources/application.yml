@@ -2,9 +2,13 @@ server:
   port: 8080
 
 env:
+  # Export 다운로드 버전 파일의 위치 지정
   folder: C:\Users\user\Desktop\DUMMY_DATA\
   # folder: \\172.16.150.135\2_팀 공유 폴더\2) 학습 DATAset_Superb AI\Export 다운로드 버전\
+
+  # JSON 파일 변환 시 저장 위치
   write: C:\Users\user\Desktop\test\
+
 spring:
   profiles:
     active: dev

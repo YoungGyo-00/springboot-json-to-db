@@ -32,7 +32,17 @@ public class ApiController {
     @Value("${env.folder}")
     private String folder_path;
 
-    @ApiOperation(value = "Meta 폴더 DB 저장(수정) 용도")
+    @ApiOperation(value = "모든 파일 DB에 한번에 저장(+수정) 용도 -> meta.json, project.json, label.json 순서")
+    @GetMapping("/all")
+    public String all() throws IOException {
+        System.out.println("all 파일 실행");
+        path("\\meta\\", 3).forEach(p -> metaService.save(p));
+        path("\\\\", 1).forEach(p -> projectService.save(p));
+        path("\\labels\\", 2).forEach(p -> objectService.save(p));
+        return "성공";
+    }
+
+    @ApiOperation(value = "Meta 폴더 DB 저장(+수정) 용도")
     @GetMapping("/meta")
     public String meta() throws IOException{
         System.out.println("meta 파일 실행");
@@ -40,7 +50,7 @@ public class ApiController {
         return "성공";
     }
 
-    @ApiOperation(value = "Object 파일 DB 저장(수정) 용도", notes = "Meta, category 파일 먼저 저장한 후 실행")
+    @ApiOperation(value = "Object 파일 DB 저장(+수정) 용도", notes = "Meta, category 파일 먼저 저장한 후 실행")
     @GetMapping("/object")
     public String object() throws IOException {
         System.out.println("object 파일 실행");
@@ -48,7 +58,7 @@ public class ApiController {
         return "성공";
     }
 
-    @ApiOperation(value = "Project 파일 DB 저장(수정) 용도")
+    @ApiOperation(value = "Project 파일 DB 저장(+수정) 용도")
     @GetMapping("/project")
     public String project() throws IOException {
         System.out.println("project 파일 실행");
@@ -62,20 +72,10 @@ public class ApiController {
         return responseService.response();
     }
 
-    @ApiOperation(value = "모든 DB에 있는 DATA -> JSON 파일로 쓰기(계층화된 폴더 구조)")
+    @ApiOperation(value = "DB에 있는 모든 DATA -> JSON 파일로 쓰기(계층화된 폴더 구조)")
     @GetMapping("/write_v1")
-    public String write_v1() throws IOException {
+    public String write_v1() {
         responseService.write_v1();
-        return "성공";
-    }
-
-    @ApiOperation(value = "모든 파일 DB에 한번에 저장")
-    @GetMapping("/all")
-    public String all() throws IOException {
-        System.out.println("all 파일 실행");
-        path("\\meta\\", 3).forEach(p -> metaService.save(p));
-        path("\\\\", 1).forEach(p -> projectService.save(p));
-        path("\\labels\\", 2).forEach(p -> objectService.save(p));
         return "성공";
     }
 

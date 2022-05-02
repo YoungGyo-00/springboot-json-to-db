@@ -42,12 +42,12 @@ public class ObjectService {
                 JSONObject annotation = (JSONObject) object_info.get("annotation");
                 JSONObject coord = (JSONObject) annotation.get("coord");
 
-                // 포인트가 없는 파일은 하나밖에 없어서 상의해봐야함 => 기능 문제
+                // 포인트가 없는 파일은 하나밖에 없어서 상의해봐야함
                 JSONArray temp1 = (JSONArray) coord.get("points");
                 JSONArray temp2 = (JSONArray) temp1.get(0);
                 JSONArray points = (JSONArray) temp2.get(0);
 
-                // 값이 없는 것도 있음, empty -> -1, null -> -2
+                // 값이 없는 것도 있음, null 저장
                 JSONArray properties = (JSONArray) object_info.get("properties");
 
                 Integer property_value = null;
@@ -79,7 +79,7 @@ public class ObjectService {
                 String[] file_arr = path.split("\\\\");
                 String file = file_arr[file_arr.length - 1];
 
-                // 프로젝트 이름
+                // project name
                 String[] project_names = path.split("\\\\");
                 String project_name = project_names[project_names.length - 3].split(" ")[0];
 
@@ -89,13 +89,14 @@ public class ObjectService {
 
                 String id = project_name + "-" + object_info.get("id");
 
-                // DB 저장
+                // Entity 저장
                 object.setId(id);
                 object.setPoints(point.toJSONString());
                 object.setPropertyValue(property_value);
                 object.setMeta(meta);
                 object.setProject(project);
 
+                // DB 저장
                 objectRepository.save(object);
             }
 
