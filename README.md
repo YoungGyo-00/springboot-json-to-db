@@ -232,4 +232,4 @@ analyze table meta;
 
 ## 추가 링크
 * [프로젝트 관리를 위한 문서들](https://github.com/YoungGyo-00/springboot-json-to-db/tree/master/artifacts/docs_managements)
-* [프로젝트 진행 시 참고했던 자료를 관리하는 폴더](https://github.com/YoungGyo-00/springboot-json-to-db/blob/master/artifacts/docs_references/REAMDE.md)
+* [프로젝트 진행 시 참고했던 자료를 관리하는 폴더](https://github.com/YoungGyo-00/springboot-json-to-db/tree/master/artifacts/docs_references)
